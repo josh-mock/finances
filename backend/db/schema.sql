@@ -8,8 +8,8 @@ CREATE TABLE banks (
 CREATE TABLE accounts (
     id SERIAL PRIMARY KEY,
     bank_id INTEGER REFERENCES banks(id),  -- nullable for credit cards or cash
-    name TEXT NOT NULL,
-    type TEXT NOT NULL CHECK (type IN ('bank', 'credit')),
+    account_name TEXT NOT NULL,
+    account_type TEXT NOT NULL CHECK (type IN ('bank', 'credit')),
     account_number TEXT UNIQUE,
     year_opened SMALLINT,
     year_closed SMALLINT,
