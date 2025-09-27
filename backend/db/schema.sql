@@ -11,8 +11,8 @@ CREATE TABLE accounts (
     name TEXT NOT NULL,
     type TEXT NOT NULL CHECK (type IN ('bank', 'credit')),
     account_number TEXT UNIQUE,
-    date_opened DATE,
-    date_closed DATE,
+    year_opened SMALLINT,
+    year_closed SMALLINT,
     is_closed BOOLEAN NOT NULL DEFAULT FALSE
 );
 
