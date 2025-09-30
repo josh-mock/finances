@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import EditAccountModal from "./EditAccountModal";
+// import EditAccountModal from "./EditAccountModal";
 import DeleteAccountButton from "./DeleteAccountButton";
 import { fetchAccounts } from "../../api/accounts";
 
@@ -21,10 +21,11 @@ export default function AccountsTable() {
         <thead>
           <tr>
             <th>Account Name</th>
+            <th>Account Type</th>
             <th>Bank</th>
             <th>Account Number</th>
-            <th>Status</th>
             <th>Year Opened</th>
+            <th>Status</th>
             <th>Year Closed</th>
           </tr>
         </thead>
@@ -32,7 +33,8 @@ export default function AccountsTable() {
           {accounts.map((account) => (
             <tr key={account.id}>
               <td>{account.account_name}</td>
-              <td>{account.bank_id}</td>
+              <td>{account.account_type}</td>
+              <td>{account.bank_name}</td>
               <td>{account.account_number}</td>
               <td>{account.is_closed ? "Closed" : "Open"}</td>
               <td>{account.year_opened}</td>
