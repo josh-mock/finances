@@ -1,5 +1,5 @@
-import BanksList from "./components/BanksList";
-import AddBank from "./components/AddBank";
+import BanksList from "./components/banks/BanksList";
+import AddBank from "./components/banks/AddBank";
 
 function App() {
   return (
