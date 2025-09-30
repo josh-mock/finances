@@ -1,4 +1,4 @@
-import BanksList from "./BanksList";
+import BanksList from "./BanksTable";
 import AddBank from "./AddBank";
 
 export default function Banks() {
