@@ -1,4 +1,3 @@
-// EditBankModal.jsx
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { updateBank } from "../../api/banks";

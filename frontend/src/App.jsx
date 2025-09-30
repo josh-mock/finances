@@ -1,11 +1,9 @@
-import BanksList from "./components/banks/BanksList";
-import AddBank from "./components/banks/AddBank";
+import Banks from "./components/banks/Banks";
 
 function App() {
   return (
     <>
-      <BanksList />
-      <AddBank />
+      <Banks />
     </>
   );
 }
