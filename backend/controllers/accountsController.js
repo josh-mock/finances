@@ -5,6 +5,7 @@ export const getAllAccounts = async (req, res) => {
     const result = await pool.query(
       `SELECT 
          a.id,
+         a.bank_id,
          b.display_name AS bank_name,
          a.account_name,
          a.account_type,

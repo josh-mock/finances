@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-// import EditAccountModal from "./EditAccountModal";
+import EditAccountModal from "./EditAccountModal";
 import DeleteAccountButton from "./DeleteAccountButton";
 import { fetchAccounts } from "../../api/accounts";
 
