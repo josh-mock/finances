@@ -18,7 +18,7 @@ CREATE TABLE accounts (
 
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL UNIQUE
+    category TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE transactions (
