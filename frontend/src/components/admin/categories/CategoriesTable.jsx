@@ -12,26 +12,33 @@ export default function CategoriesTable() {
   const [editingCategory, setEditingCategory] = useState(null);
 
   if (categories.length === 0) {
-    return <div>No categories</div>;
+    return <div className="table__empty">No categories</div>;
   }
 
   return (
-    <div>
-      <table>
+    <div className="categories-table">
+      <table className="table">
         <thead>
           <tr>
             <th>Category</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {categories.map((category) => (
             <tr key={category.id}>
               <td>{category.category}</td>
-              <td>
-                <button onClick={() => setEditingCategory(category)}>
+              <td className="table__actions">
+                <button
+                  className="table__button"
+                  onClick={() => setEditingCategory(category)}
+                >
                   Edit
                 </button>
-                <DeleteCategoryButton id={category.id} />
+                <DeleteCategoryButton
+                  id={category.id}
+                  className="table__button table__button--danger"
+                />
               </td>
             </tr>
           ))}

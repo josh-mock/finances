@@ -12,21 +12,22 @@ export default function AccountsTable() {
   const [editingAccount, setEditingAccount] = useState(null);
 
   if (accounts.length === 0) {
-    return <div>No accounts</div>;
+    return <div className="table__empty">No accounts</div>;
   }
 
   return (
-    <div>
-      <table>
+    <div className="accounts-table">
+      <table className="table">
         <thead>
           <tr>
             <th>Account Name</th>
             <th>Account Type</th>
             <th>Bank</th>
             <th>Account Number</th>
-            <th>Year Opened</th>
             <th>Status</th>
+            <th>Year Opened</th>
             <th>Year Closed</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -39,9 +40,17 @@ export default function AccountsTable() {
               <td>{account.is_closed ? "Closed" : "Open"}</td>
               <td>{account.year_opened}</td>
               <td>{account.year_closed}</td>
-              <td>
-                <button onClick={() => setEditingAccount(account)}>Edit</button>
-                <DeleteAccountButton id={account.id} />
+              <td className="table__actions">
+                <button
+                  className="table__button"
+                  onClick={() => setEditingAccount(account)}
+                >
+                  Edit
+                </button>
+                <DeleteAccountButton
+                  id={account.id}
+                  className="table__button table__button--danger"
+                />
               </td>
             </tr>
           ))}

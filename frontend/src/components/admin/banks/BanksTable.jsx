@@ -5,16 +5,19 @@ import DeleteBankButton from "./DeleteBankButton";
 import { fetchBanks } from "../../../api/banks";
 
 export default function BanksTable() {
-  const { data: banks = [] } = useQuery({ queryKey: ["banks"], queryFn: fetchBanks });
+  const { data: banks = [] } = useQuery({
+    queryKey: ["banks"],
+    queryFn: fetchBanks,
+  });
   const [editingBank, setEditingBank] = useState(null);
 
   if (banks.length === 0) {
-    return <div>No banks</div>;
+    return <div className="table__empty">No banks</div>;
   }
 
   return (
-    <div>
-      <table>
+    <div className="banks-table">
+      <table className="table">
         <thead>
           <tr>
             <th>Legal Name</th>
@@ -29,9 +32,17 @@ export default function BanksTable() {
               <td>{bank.legal_name}</td>
               <td>{bank.display_name}</td>
               <td>{bank.address}</td>
-              <td>
-                <button onClick={() => setEditingBank(bank)}>Edit</button>
-                <DeleteBankButton id={bank.id} />
+              <td className="table__actions">
+                <button
+                  className="table__button"
+                  onClick={() => setEditingBank(bank)}
+                >
+                  Edit
+                </button>
+                <DeleteBankButton
+                  id={bank.id}
+                  className="table__button table__button--danger"
+                />
               </td>
             </tr>
           ))}

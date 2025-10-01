@@ -77,6 +77,7 @@ function AddAccount() {
             required: true,
             min: 1900,
             max: currentYear,
+            valueAsNumber: true,
           })}
           placeholder="YYYY"
         />
@@ -98,6 +99,7 @@ function AddAccount() {
               required: false,
               min: 1900,
               max: currentYear,
+              valueAsNumber: true,
             })}
             placeholder="YYYY"
           />
