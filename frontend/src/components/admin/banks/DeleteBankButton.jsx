@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCategory } from "../../api/categories";
+import { deleteBank } from "../../../api/banks"
 
-export default function DeleteCategoryButton({ id }) {
+export default function DeleteBankButton({ id }) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: deleteCategory,
+    mutationFn: deleteBank,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["categories"] });
+      queryClient.invalidateQueries({ queryKey: ["banks"] });
     },
   });
 

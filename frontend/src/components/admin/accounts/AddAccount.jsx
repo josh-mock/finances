@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { createAccount } from "../../api/accounts";
-import { fetchBanks } from "../../api/banks";
+import { createAccount } from "../../../api/accounts";
+import { fetchBanks } from "../../../api/banks";
 
 function AddAccount() {
   const queryClient = useQueryClient();

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { createCategory } from "../../api/categories";
+import { createCategory } from "../../../api/categories";
 
 function AddCategory() {
   const queryClient = useQueryClient();

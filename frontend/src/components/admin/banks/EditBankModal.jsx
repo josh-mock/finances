@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { updateBank } from "../../api/banks";
+import { updateBank } from "../../../api/banks";
 
 function EditBankModal({ bank, onClose }) {
   const queryClient = useQueryClient();

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import EditCategoryModal from "./EditCategoryModal";
 import DeleteCategoryButton from "./DeleteCategoryButton";
-import { fetchCategories } from "../../api/categories";
+import { fetchCategories } from "../../../api/categories";
 
 export default function CategoriesTable() {
   const { data: categories = [] } = useQuery({

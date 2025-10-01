@@ -1,13 +1,9 @@
-import Banks from "./components/banks/Banks";
-import Accounts from "./components/accounts/Accounts";
-import Categories from "./components/categories/Categories";
+import Admin from "./components/admin/admin";
 
 function App() {
   return (
     <>
-      <Banks />
-      <Accounts />
-      <Categories />
+      <Admin />
     </>
   );
 }

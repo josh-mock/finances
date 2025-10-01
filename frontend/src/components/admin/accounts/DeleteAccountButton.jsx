@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteAccount } from "../../api/accounts";
+import { deleteAccount } from "../../../api/accounts";
 
 export default function DeleteAccountButton({ id }) {
   const queryClient = useQueryClient();
