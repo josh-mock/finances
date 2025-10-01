@@ -20,7 +20,7 @@ function EditBankModal({ bank, onClose }) {
   return (
     <div className="modal-backdrop">
       <div className="modal-content">
-        <h2>Edit Bank</h2>
+        <h4>Edit Bank</h4>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label>Legal Name</label>

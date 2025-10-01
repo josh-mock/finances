@@ -33,24 +33,31 @@ function AddAccount() {
   return (
     <>
       <h4>Add Account</h4>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Account Name</label>
-          <input {...register("account_name", { required: true })} />
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="form__group">
+          <label className="form__label">Account Name</label>
+          <input
+            className="form__input"
+            {...register("account_name", { required: true })}
+          />
         </div>
 
-        <div>
-          <label>Account Type</label>
-          <select {...register("account_type", { required: true })}>
+        <div className="form__group">
+          <label className="form__label">Account Type</label>
+          <select
+            className="form__select"
+            {...register("account_type", { required: true })}
+          >
             <option value="bank">Bank</option>
             <option value="credit">Credit</option>
           </select>
         </div>
 
         {accountType === "bank" && (
-          <div>
-            <label>Bank</label>
+          <div className="form__group">
+            <label className="form__label">Bank</label>
             <select
+              className="form__select"
               {...register("bank_id", { required: false })}
               disabled={banksLoading}
             >
@@ -65,16 +72,20 @@ function AddAccount() {
         )}
 
         {accountType === "bank" && (
-          <div>
-            <label>Account Number</label>
-            <input {...register("account_number", { required: false })} />
+          <div className="form__group">
+            <label className="form__label">Account Number</label>
+            <input
+              className="form__input"
+              {...register("account_number", { required: false })}
+            />
           </div>
         )}
 
-        <div>
-          <label>Year Opened</label>
+        <div className="form__group">
+          <label className="form__label">Year Opened</label>
           <input
             type="number"
+            className="form__input"
             {...register("year_opened", {
               required: true,
               min: 1900,
@@ -85,18 +96,17 @@ function AddAccount() {
           />
         </div>
 
-        <div>
-          <label>
-            <input type="checkbox" {...register("is_closed")} />
-            Account closed
-          </label>
+        <div className="form__checkbox">
+          <input type="checkbox" {...register("is_closed")} />
+          <label className="form__label">Account closed</label>
         </div>
 
         {isClosed && (
-          <div>
-            <label>Year Closed</label>
+          <div className="form__group">
+            <label className="form__label">Year Closed</label>
             <input
               type="number"
+              className="form__input"
               {...register("year_closed", {
                 required: false,
                 min: 1900,
@@ -108,7 +118,11 @@ function AddAccount() {
           </div>
         )}
 
-        <button type="submit" disabled={mutation.isLoading}>
+        <button
+          type="submit"
+          className="form__button"
+          disabled={mutation.isLoading}
+        >
           {mutation.isLoading ? "Adding..." : "Add Account"}
         </button>
       </form>

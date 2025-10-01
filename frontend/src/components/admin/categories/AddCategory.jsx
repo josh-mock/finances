@@ -23,13 +23,20 @@ function AddCategory() {
   return (
     <>
       <h4>Add Category</h4>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Category</label>
-          <input {...register("category", { required: true })} />
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="form__group">
+          <label className="form__label">Category</label>
+          <input
+            className="form__input"
+            {...register("category", { required: true })}
+          />
         </div>
 
-        <button type="submit" disabled={mutation.isLoading}>
+        <button
+          type="submit"
+          className="form__button"
+          disabled={mutation.isLoading}
+        >
           {mutation.isLoading ? "Adding..." : "Add Category"}
         </button>
       </form>
