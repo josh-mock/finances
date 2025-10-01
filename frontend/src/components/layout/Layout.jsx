@@ -10,7 +10,7 @@ export default function Layout() {
           <nav className="layout__nav">
             <ul className="layout__nav-list">
               <li className="layout__nav-item">
-                <Link className="layout__nav-link" to="/dashboard">
+                <Link className="layout__nav-link" to="/">
                   Dashboard
                 </Link>
               </li>

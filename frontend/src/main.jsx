@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import "./styles/normalize.css";
 import "./styles/generics.css";
 import "./styles/layout.css";
+import "./styles/admin.css"
 
 const queryClient = new QueryClient();
 
