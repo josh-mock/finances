@@ -20,23 +20,26 @@ function AddBank() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>Legal Name</label>
-        <input {...register("legal_name", { required: true })} />
-      </div>
-      <div>
-        <label>Display Name</label>
-        <input {...register("display_name", { required: true })} />
-      </div>
-      <div>
-        <label>Address</label>
-        <input {...register("address", { required: true })} />
-      </div>
-      <button type="submit" disabled={mutation.isLoading}>
-        {mutation.isLoading ? "Adding..." : "Add Bank"}
-      </button>
-    </form>
+    <>
+      <h4>Add Bank</h4>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label>Legal Name</label>
+          <input {...register("legal_name", { required: true })} />
+        </div>
+        <div>
+          <label>Display Name</label>
+          <input {...register("display_name", { required: true })} />
+        </div>
+        <div>
+          <label>Address</label>
+          <input {...register("address", { required: true })} />
+        </div>
+        <button type="submit" disabled={mutation.isLoading}>
+          {mutation.isLoading ? "Adding..." : "Add Bank"}
+        </button>
+      </form>
+    </>
   );
 }
 

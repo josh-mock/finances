@@ -21,16 +21,19 @@ function AddCategory() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>Category</label>
-        <input {...register("category", { required: true })} />
-      </div>
+    <>
+      <h4>Add Category</h4>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label>Category</label>
+          <input {...register("category", { required: true })} />
+        </div>
 
-      <button type="submit" disabled={mutation.isLoading}>
-        {mutation.isLoading ? "Adding..." : "Add Category"}
-      </button>
-    </form>
+        <button type="submit" disabled={mutation.isLoading}>
+          {mutation.isLoading ? "Adding..." : "Add Category"}
+        </button>
+      </form>
+    </>
   );
 }
 
