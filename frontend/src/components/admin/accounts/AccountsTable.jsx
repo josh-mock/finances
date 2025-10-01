@@ -40,7 +40,7 @@ export default function AccountsTable() {
               <td>{account.is_closed ? "Closed" : "Open"}</td>
               <td>{account.year_opened}</td>
               <td>{account.year_closed}</td>
-              <td className="table__actions">
+              <td>
                 <button
                   className="table__button"
                   onClick={() => setEditingAccount(account)}

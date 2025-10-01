@@ -32,7 +32,7 @@ export default function BanksTable() {
               <td>{bank.legal_name}</td>
               <td>{bank.display_name}</td>
               <td>{bank.address}</td>
-              <td className="table__actions">
+              <td>
                 <button
                   className="table__button"
                   onClick={() => setEditingBank(bank)}

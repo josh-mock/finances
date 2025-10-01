@@ -28,7 +28,7 @@ export default function CategoriesTable() {
           {categories.map((category) => (
             <tr key={category.id}>
               <td>{category.category}</td>
-              <td className="table__actions">
+              <td>
                 <button
                   className="table__button"
                   onClick={() => setEditingCategory(category)}
