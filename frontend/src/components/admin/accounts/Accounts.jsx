@@ -4,7 +4,7 @@ import AddAccount from "./AddAccount";
 export default function Accounts() {
   return (
     <>
-      <h2>Accounts</h2>
+      <h3>Accounts</h3>
       <AccountsTable />
       <AddAccount />
     </>

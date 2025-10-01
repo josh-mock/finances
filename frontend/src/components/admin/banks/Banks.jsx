@@ -4,7 +4,7 @@ import AddBank from "./AddBank";
 export default function Banks() {
   return (
     <>
-      <h2>Banks</h2>
+      <h3>Banks</h3>
       <BanksTable />
       <AddBank />
     </>

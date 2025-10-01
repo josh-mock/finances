@@ -4,7 +4,7 @@ import AddCategory from "./AddCategory";
 export default function Categories() {
   return (
     <>
-      <h2>Categories</h2>
+      <h3>Categories</h3>
       <CategoriesTable />
       <AddCategory />
     </>

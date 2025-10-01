@@ -8,6 +8,7 @@ function Admin() {
 
   return (
     <>
+    <h2>Admin</h2>
       <div>
         <button onClick={() => setActive("banks")}>Banks</button>
         <button onClick={() => setActive("accounts")}>Accounts</button>
