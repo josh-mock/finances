@@ -33,7 +33,7 @@ function AddBank() {
         </div>
         <div>
           <label>Address</label>
-          <input {...register("address", { required: true })} />
+          <textarea {...register("address", { required: true })} />
         </div>
         <button type="submit" disabled={mutation.isLoading}>
           {mutation.isLoading ? "Adding..." : "Add Bank"}
