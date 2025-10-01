@@ -47,10 +47,7 @@ export default function AccountsTable() {
                 >
                   Edit
                 </button>
-                <DeleteAccountButton
-                  id={account.id}
-                  className="table__button table__button--danger"
-                />
+                <DeleteAccountButton id={account.id} />
               </td>
             </tr>
           ))}

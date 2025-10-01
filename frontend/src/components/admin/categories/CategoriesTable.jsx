@@ -35,10 +35,7 @@ export default function CategoriesTable() {
                 >
                   Edit
                 </button>
-                <DeleteCategoryButton
-                  id={category.id}
-                  className="table__button table__button--danger"
-                />
+                <DeleteCategoryButton id={category.id} />
               </td>
             </tr>
           ))}

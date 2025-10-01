@@ -16,7 +16,11 @@ export default function DeleteCategoryButton({ id }) {
   };
 
   return (
-    <button onClick={handleDelete} disabled={mutation.isLoading}>
+    <button
+      onClick={handleDelete}
+      disabled={mutation.isLoading}
+      className="table__button table__button--danger"
+    >
       {mutation.isLoading ? "Deleting..." : "Delete"}
     </button>
   );

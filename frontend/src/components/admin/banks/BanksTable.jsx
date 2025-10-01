@@ -39,10 +39,7 @@ export default function BanksTable() {
                 >
                   Edit
                 </button>
-                <DeleteBankButton
-                  id={bank.id}
-                  className="table__button table__button--danger"
-                />
+                <DeleteBankButton id={bank.id} />
               </td>
             </tr>
           ))}
