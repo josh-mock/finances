@@ -31,26 +31,28 @@ export default function AccountsTable() {
           </tr>
         </thead>
         <tbody>
-          {accounts.map((account) => (
-            <tr key={account.id}>
-              <td>{account.account_name}</td>
-              <td>{account.account_type}</td>
-              <td>{account.bank_name}</td>
-              <td>{account.account_number}</td>
-              <td>{account.is_closed ? "Closed" : "Open"}</td>
-              <td>{account.year_opened}</td>
-              <td>{account.year_closed}</td>
-              <td>
-                <button
-                  className="table__button"
-                  onClick={() => setEditingAccount(account)}
-                >
-                  Edit
-                </button>
-                <DeleteAccountButton id={account.id} />
-              </td>
-            </tr>
-          ))}
+          {accounts
+            .sort((a, b) => a.account_name.localeCompare(b.account_name))
+            .map((account) => (
+              <tr key={account.id}>
+                <td>{account.account_name}</td>
+                <td>{account.account_type}</td>
+                <td>{account.bank_name}</td>
+                <td>{account.account_number}</td>
+                <td>{account.is_closed ? "Closed" : "Open"}</td>
+                <td>{account.year_opened}</td>
+                <td>{account.year_closed}</td>
+                <td>
+                  <button
+                    className="table__button"
+                    onClick={() => setEditingAccount(account)}
+                  >
+                    Edit
+                  </button>
+                  <DeleteAccountButton id={account.id} />
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
 

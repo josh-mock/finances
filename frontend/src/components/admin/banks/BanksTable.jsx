@@ -27,22 +27,24 @@ export default function BanksTable() {
           </tr>
         </thead>
         <tbody>
-          {banks.map((bank) => (
-            <tr key={bank.id}>
-              <td>{bank.legal_name}</td>
-              <td>{bank.display_name}</td>
-              <td>{bank.address}</td>
-              <td>
-                <button
-                  className="table__button"
-                  onClick={() => setEditingBank(bank)}
-                >
-                  Edit
-                </button>
-                <DeleteBankButton id={bank.id} />
-              </td>
-            </tr>
-          ))}
+          {banks
+            .sort((a, b) => a.legal_name.localeCompare(b.legal_name))
+            .map((bank) => (
+              <tr key={bank.id}>
+                <td>{bank.legal_name}</td>
+                <td>{bank.display_name}</td>
+                <td>{bank.address}</td>
+                <td>
+                  <button
+                    className="table__button"
+                    onClick={() => setEditingBank(bank)}
+                  >
+                    Edit
+                  </button>
+                  <DeleteBankButton id={bank.id} />
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
 

@@ -25,20 +25,22 @@ export default function CategoriesTable() {
           </tr>
         </thead>
         <tbody>
-          {categories.map((category) => (
-            <tr key={category.id}>
-              <td>{category.category}</td>
-              <td>
-                <button
-                  className="table__button"
-                  onClick={() => setEditingCategory(category)}
-                >
-                  Edit
-                </button>
-                <DeleteCategoryButton id={category.id} />
-              </td>
-            </tr>
-          ))}
+          {categories
+            .sort((a, b) => a.category.localeCompare(b.category))
+            .map((category) => (
+              <tr key={category.id}>
+                <td>{category.category}</td>
+                <td>
+                  <button
+                    className="table__button"
+                    onClick={() => setEditingCategory(category)}
+                  >
+                    Edit
+                  </button>
+                  <DeleteCategoryButton id={category.id} />
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
 
