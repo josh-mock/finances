@@ -1,3 +1,5 @@
+// TODO: Have two tables with a toggle: one which has status, year closed, and closed accounts, and one without. 
+
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import EditAccountModal from "./EditAccountModal";
