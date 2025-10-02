@@ -18,13 +18,28 @@ function AddAccount() {
     },
   });
 
-  const { register, handleSubmit, reset, watch } = useForm();
+  const { register, handleSubmit, reset, watch } = useForm({
+    defaultValues: {
+      account_type: "bank",
+    },
+  });
+
   const accountType = watch("account_type");
   const isClosed = watch("is_closed");
 
   const onSubmit = (data) => {
     mutation.mutate(data, {
-      onSuccess: () => reset(),
+      onSuccess: () =>
+        reset({
+          account_type: "bank",
+          account_name: "",
+          bank_id: "",
+          account_number: "",
+          year_opened: "",
+          is_isa: false,
+          is_closed: false,
+          year_closed: "",
+        }),
     });
   };
 
@@ -94,6 +109,11 @@ function AddAccount() {
             })}
             placeholder="YYYY"
           />
+        </div>
+
+        <div className="form__checkbox">
+          <input type="checkbox" {...register("is_isa")} />
+          <label className="form__label">ISA</label>
         </div>
 
         <div className="form__checkbox">

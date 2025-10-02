@@ -12,7 +12,8 @@ export const getAllAccounts = async (req, res) => {
          a.account_number,
          a.year_opened,
          a.year_closed,
-         a.is_closed
+         a.is_closed,
+         a.is_isa
        FROM accounts a
        LEFT JOIN banks b ON a.bank_id = b.id`
     );
@@ -49,6 +50,7 @@ export const createAccount = async (req, res) => {
       year_opened,
       year_closed,
       is_closed,
+      is_isa,
     } = req.body;
 
     const result = await pool.query(
@@ -59,8 +61,9 @@ export const createAccount = async (req, res) => {
         account_number, 
         year_opened, 
         year_closed, 
-        is_closed
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+        is_closed,
+        is_isa
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
       [
         bank_id,
         account_name,
@@ -69,6 +72,7 @@ export const createAccount = async (req, res) => {
         year_opened,
         year_closed,
         is_closed,
+        is_isa,
       ]
     );
 
@@ -89,6 +93,7 @@ export const updateAccount = async (req, res) => {
       year_opened,
       year_closed,
       is_closed,
+      is_isa
     } = req.body;
 
     const result = await pool.query(
@@ -100,8 +105,9 @@ export const updateAccount = async (req, res) => {
          account_number = $4, 
          year_opened = $5, 
          year_closed = $6, 
-         is_closed = $7 
-       WHERE id = $8 
+         is_closed = $7,
+         is_isa = $8 
+       WHERE id = $9 
        RETURNING *`,
       [
         bank_id,
@@ -111,6 +117,7 @@ export const updateAccount = async (req, res) => {
         year_opened,
         year_closed,
         is_closed,
+        is_isa,
         id,
       ]
     );

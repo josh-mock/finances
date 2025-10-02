@@ -7,13 +7,14 @@ CREATE TABLE banks (
 
 CREATE TABLE accounts (
     id SERIAL PRIMARY KEY,
-    bank_id INTEGER REFERENCES banks(id),  -- nullable for credit cards or cash
+    bank_id INTEGER REFERENCES banks(id),
     account_name TEXT NOT NULL,
     account_type TEXT NOT NULL CHECK (account_type IN ('bank', 'credit')),
     account_number TEXT UNIQUE,
     year_opened SMALLINT,
     year_closed SMALLINT,
-    is_closed BOOLEAN NOT NULL DEFAULT FALSE
+    is_closed BOOLEAN NOT NULL DEFAULT FALSE,
+    is_isa BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE categories (

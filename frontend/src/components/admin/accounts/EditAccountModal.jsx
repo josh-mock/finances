@@ -88,6 +88,11 @@ function EditAccountModal({ account, onClose }) {
             />
           </div>
 
+          <div className="form__checkbox">
+            <input type="checkbox" {...register("is_isa")} />
+            <label className="form__label">ISA</label>
+          </div>
+
           <div>
             <label>
               <input type="checkbox" {...register("is_closed")} />

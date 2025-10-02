@@ -24,6 +24,7 @@ export default function AccountsTable() {
             <th>Account Type</th>
             <th>Bank</th>
             <th>Account Number</th>
+            <th>ISA</th>
             <th>Status</th>
             <th>Year Opened</th>
             <th>Year Closed</th>
@@ -36,9 +37,13 @@ export default function AccountsTable() {
             .map((account) => (
               <tr key={account.id}>
                 <td>{account.account_name}</td>
-                <td>{account.account_type}</td>
+                <td>
+                  {account.account_type.charAt(0).toUpperCase() +
+                    account.account_type.slice(1)}
+                </td>
                 <td>{account.bank_name}</td>
                 <td>{account.account_number}</td>
+                <td>{account.is_isa ? "Yes" : "No"}</td>
                 <td>{account.is_closed ? "Closed" : "Open"}</td>
                 <td>{account.year_opened}</td>
                 <td>{account.year_closed}</td>
