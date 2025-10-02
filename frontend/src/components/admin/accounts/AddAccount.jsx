@@ -28,7 +28,20 @@ function AddAccount() {
   const isClosed = watch("is_closed");
 
   const onSubmit = (data) => {
-    mutation.mutate(data, {
+    const payload = {
+      account_type: data.account_type,
+      account_name: data.account_name,
+      year_opened: data.year_opened,
+      is_isa: data.is_isa,
+      is_closed: data.is_closed,
+      year_closed: data.is_closed ? data.year_closed : null,
+      ...(data.account_type === "bank" && {
+        bank_id: data.bank_id || null,
+        account_number: data.account_number || null,
+      }),
+    };
+
+    mutation.mutate(payload, {
       onSuccess: () =>
         reset({
           account_type: "bank",
