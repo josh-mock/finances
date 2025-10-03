@@ -8,6 +8,7 @@ import {
 import dayjs from "dayjs";
 import { useState } from "react";
 import { fetchTransactions } from "../../api/transactions";
+import TransactionFilters from "./transactionFilters";
 
 export default function TransactionsTable() {
   const { data: transactions = [] } = useQuery({
@@ -21,11 +22,15 @@ export default function TransactionsTable() {
 
   const accountOptions = Array.from(
     new Set(transactions.map((t) => t.account_name))
-  );
+  ).sort();
+
   const categoryOptions = Array.from(
     new Set(transactions.map((t) => t.category))
-  );
-  const typeOptions = Array.from(new Set(transactions.map((t) => t.type)));
+  ).sort();
+
+  const typeOptions = Array.from(
+    new Set(transactions.map((t) => t.type))
+  ).sort();
 
   const columns = [
     {
@@ -113,147 +118,13 @@ export default function TransactionsTable() {
 
   return (
     <div className="table-container">
-      <div>
-        <h2>Filters</h2>
-
-        <h3>Description</h3>
-        <input
-          type="text"
-          value={columnFilters.find((f) => f.id === "description")?.value || ""}
-          onChange={(e) => handleFilterChange("description", e.target.value)}
-        />
-
-        <h3>Amount</h3>
-        <label>
-          Min:
-          <input
-            type="number"
-            step="0.01"
-            value={
-              columnFilters.find((f) => f.id === "amount")?.value?.min || ""
-            }
-            onChange={(e) =>
-              handleFilterChange("amount", {
-                ...columnFilters.find((f) => f.id === "amount")?.value,
-                min: e.target.value ? Number(e.target.value) : undefined,
-              })
-            }
-          />
-        </label>
-        <label>
-          Max:
-          <input
-            type="number"
-            step="0.01"
-            value={
-              columnFilters.find((f) => f.id === "amount")?.value?.max || ""
-            }
-            onChange={(e) =>
-              handleFilterChange("amount", {
-                ...columnFilters.find((f) => f.id === "amount")?.value,
-                max: e.target.value ? Number(e.target.value) : undefined,
-              })
-            }
-          />
-        </label>
-
-        <h3>Date</h3>
-        <label>
-          From:
-          <input
-            type="date"
-            value={columnFilters.find((f) => f.id === "date")?.value?.min || ""}
-            onChange={(e) =>
-              handleFilterChange("date", {
-                ...columnFilters.find((f) => f.id === "date")?.value,
-                min: e.target.value || undefined,
-              })
-            }
-          />
-        </label>
-        <label>
-          To:
-          <input
-            type="date"
-            value={columnFilters.find((f) => f.id === "date")?.value?.max || ""}
-            onChange={(e) =>
-              handleFilterChange("date", {
-                ...columnFilters.find((f) => f.id === "date")?.value,
-                max: e.target.value || undefined,
-              })
-            }
-          />
-        </label>
-
-        <h3>Account</h3>
-        {accountOptions.map((account) => {
-          const values =
-            columnFilters.find((f) => f.id === "account_name")?.value || [];
-          return (
-            <label key={account}>
-              <input
-                type="checkbox"
-                checked={values.includes(account)}
-                onChange={() =>
-                  handleFilterChange(
-                    "account_name",
-                    values.includes(account)
-                      ? values.filter((v) => v !== account)
-                      : [...values, account]
-                  )
-                }
-              />
-              {account}
-            </label>
-          );
-        })}
-
-        <h3>Category</h3>
-        {categoryOptions.map((category) => {
-          const values =
-            columnFilters.find((f) => f.id === "category")?.value || [];
-          return (
-            <label key={category}>
-              <input
-                type="checkbox"
-                checked={values.includes(category)}
-                onChange={() =>
-                  handleFilterChange(
-                    "category",
-                    values.includes(category)
-                      ? values.filter((v) => v !== category)
-                      : [...values, category]
-                  )
-                }
-              />
-              {category}
-            </label>
-          );
-        })}
-
-        <h3>Type</h3>
-        {typeOptions.map((type) => {
-          const values =
-            columnFilters.find((f) => f.id === "type")?.value || [];
-          return (
-            <label key={type}>
-              <input
-                type="checkbox"
-                checked={values.includes(type)}
-                onChange={() =>
-                  handleFilterChange(
-                    "type",
-                    values.includes(type)
-                      ? values.filter((v) => v !== type)
-                      : [...values, type]
-                  )
-                }
-              />
-              {type}
-            </label>
-          );
-        })}
-      </div>
+      <TransactionFilters
+        columnFilters={columnFilters}
+        handleFilterChange={handleFilterChange}
+        accountOptions={accountOptions}
+        categoryOptions={categoryOptions}
+        typeOptions={typeOptions}
+      />
 
       <table className="table">
         <thead>

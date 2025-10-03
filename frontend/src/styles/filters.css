@@ -1,0 +1,79 @@
+/* Filters wrapper */
+.filters {
+  border: 0.1rem solid #ccc;
+  border-radius: 0.4rem;
+  padding: 1.6rem;
+  margin-bottom: 2.4rem;
+  background-color: #fafafa;
+  font-size: 1.4rem;
+}
+
+/* Filters hidden */
+.filters--hidden {
+  display: none;
+}
+
+/* Filter sections */
+.filters h2 {
+  margin-bottom: 1.2rem;
+  font-size: 1.6rem;
+}
+
+.filters h3 {
+  margin: 1.6rem 0 0.8rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* Filter labels */
+.filters label,
+.filters__range .form__label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.filters label {
+  margin-bottom: 0.8rem;
+  font-size: 1.4rem;
+}
+
+/* Inputs inside filters */
+.filters input[type="text"],
+.filters input[type="number"],
+.filters input[type="date"] {
+  padding: 0.8rem 1.2rem;
+  font-size: 1.4rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.4rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Checkbox alignment */
+.filters input[type="checkbox"] {
+  width: auto;
+}
+
+/* Min/Max inline */
+.filters__range {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.filters__range label {
+  flex: 1;
+}
+
+.filters__range .form__label span {
+  display: inline-block;
+  min-width: 4.8rem; /* adjust to fit the longest label */
+  text-align: right;
+}
+
+/* Checkboxes inline, wrapping */
+.filters__checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
