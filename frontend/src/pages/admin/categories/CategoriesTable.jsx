@@ -16,7 +16,7 @@ export default function CategoriesTable() {
   }
 
   return (
-    <div className="categories-table">
+    <div className="table-container">
       <table className="table">
         <thead>
           <tr>

@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
+import TransactionsTable from "./TransactionsTable";
 
 export default function Transactions() {
-  return (
-    <div>Transactions</div>
-  )
+  return <TransactionsTable />;
 }

@@ -60,10 +60,7 @@
   background-color: #fbecec;
 }
 
-/* Specific table wrappers */
-.accounts-table,
-.banks-table,
-.categories-table {
+.table-container {
   overflow-x: auto;
   margin-bottom: 3.2rem;
 }

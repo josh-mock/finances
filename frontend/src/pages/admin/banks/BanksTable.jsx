@@ -16,7 +16,7 @@ export default function BanksTable() {
   }
 
   return (
-    <div className="banks-table">
+    <div className="table-container">
       <table className="table">
         <thead>
           <tr>

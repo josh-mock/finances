@@ -1,4 +1,4 @@
-// TODO: Have two tables with a toggle: one which has status, year closed, and closed accounts, and one without. 
+// TODO: Have two tables with a toggle: one which has status, year closed, and closed accounts, and one without.
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -18,7 +18,7 @@ export default function AccountsTable() {
   }
 
   return (
-    <div className="accounts-table">
+    <div className="table-container">
       <table className="table">
         <thead>
           <tr>
