@@ -22,11 +22,9 @@ export default function TransactionsTable() {
   const accountOptions = Array.from(
     new Set(transactions.map((t) => t.account_name))
   );
-
   const categoryOptions = Array.from(
     new Set(transactions.map((t) => t.category))
   );
-
   const typeOptions = Array.from(new Set(transactions.map((t) => t.type)));
 
   const columns = [
@@ -34,6 +32,13 @@ export default function TransactionsTable() {
       accessorKey: "date",
       header: "Date",
       cell: ({ getValue }) => dayjs(getValue()).format("YYYY/MM/DD"),
+      filterFn: (row, columnId, value) => {
+        if (!value?.min && !value?.max) return true;
+        const date = dayjs(row.getValue(columnId));
+        if (value.min && date.isBefore(dayjs(value.min), "day")) return false;
+        if (value.max && date.isAfter(dayjs(value.max), "day")) return false;
+        return true;
+      },
     },
     {
       accessorKey: "amount",
@@ -43,8 +48,25 @@ export default function TransactionsTable() {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })}`,
+      filterFn: (row, columnId, value) => {
+        if (!value?.min && !value?.max) return true;
+        const amount = row.getValue(columnId); // already in pennies
+        if (value.min && amount < value.min * 100) return false; // convert pounds to pennies
+        if (value.max && amount > value.max * 100) return false;
+        return true;
+      },
     },
-    { accessorKey: "description", header: "Description" },
+    {
+      accessorKey: "description",
+      header: "Description",
+      filterFn: (row, columnId, value) => {
+        if (!value) return true;
+        return row
+          .getValue(columnId)
+          ?.toLowerCase()
+          .includes(value.toLowerCase());
+      },
+    },
     {
       accessorKey: "type",
       header: "Type",
@@ -79,18 +101,9 @@ export default function TransactionsTable() {
   });
 
   const handleFilterChange = (id, value) => {
-    const currentFilter = columnFilters.find((f) => f.id === id);
-    let values = currentFilter?.value || [];
-
-    if (values.includes(value)) {
-      values = values.filter((v) => v !== value);
-    } else {
-      values = [...values, value];
-    }
-
     setColumnFilters((prev) => [
       ...prev.filter((f) => f.id !== id),
-      { id, value: values },
+      { id, value },
     ]);
   };
 
@@ -103,6 +116,75 @@ export default function TransactionsTable() {
       <div>
         <h2>Filters</h2>
 
+        <h3>Description</h3>
+        <input
+          type="text"
+          value={columnFilters.find((f) => f.id === "description")?.value || ""}
+          onChange={(e) => handleFilterChange("description", e.target.value)}
+        />
+
+        <h3>Amount</h3>
+        <label>
+          Min:
+          <input
+            type="number"
+            step="0.01"
+            value={
+              columnFilters.find((f) => f.id === "amount")?.value?.min || ""
+            }
+            onChange={(e) =>
+              handleFilterChange("amount", {
+                ...columnFilters.find((f) => f.id === "amount")?.value,
+                min: e.target.value ? Number(e.target.value) : undefined,
+              })
+            }
+          />
+        </label>
+        <label>
+          Max:
+          <input
+            type="number"
+            step="0.01"
+            value={
+              columnFilters.find((f) => f.id === "amount")?.value?.max || ""
+            }
+            onChange={(e) =>
+              handleFilterChange("amount", {
+                ...columnFilters.find((f) => f.id === "amount")?.value,
+                max: e.target.value ? Number(e.target.value) : undefined,
+              })
+            }
+          />
+        </label>
+
+        <h3>Date</h3>
+        <label>
+          From:
+          <input
+            type="date"
+            value={columnFilters.find((f) => f.id === "date")?.value?.min || ""}
+            onChange={(e) =>
+              handleFilterChange("date", {
+                ...columnFilters.find((f) => f.id === "date")?.value,
+                min: e.target.value || undefined,
+              })
+            }
+          />
+        </label>
+        <label>
+          To:
+          <input
+            type="date"
+            value={columnFilters.find((f) => f.id === "date")?.value?.max || ""}
+            onChange={(e) =>
+              handleFilterChange("date", {
+                ...columnFilters.find((f) => f.id === "date")?.value,
+                max: e.target.value || undefined,
+              })
+            }
+          />
+        </label>
+
         <h3>Account</h3>
         {accountOptions.map((account) => {
           const values =
@@ -112,7 +194,14 @@ export default function TransactionsTable() {
               <input
                 type="checkbox"
                 checked={values.includes(account)}
-                onChange={() => handleFilterChange("account_name", account)}
+                onChange={() =>
+                  handleFilterChange(
+                    "account_name",
+                    values.includes(account)
+                      ? values.filter((v) => v !== account)
+                      : [...values, account]
+                  )
+                }
               />
               {account}
             </label>
@@ -128,7 +217,14 @@ export default function TransactionsTable() {
               <input
                 type="checkbox"
                 checked={values.includes(category)}
-                onChange={() => handleFilterChange("category", category)}
+                onChange={() =>
+                  handleFilterChange(
+                    "category",
+                    values.includes(category)
+                      ? values.filter((v) => v !== category)
+                      : [...values, category]
+                  )
+                }
               />
               {category}
             </label>
@@ -144,7 +240,14 @@ export default function TransactionsTable() {
               <input
                 type="checkbox"
                 checked={values.includes(type)}
-                onChange={() => handleFilterChange("type", type)}
+                onChange={() =>
+                  handleFilterChange(
+                    "type",
+                    values.includes(type)
+                      ? values.filter((v) => v !== type)
+                      : [...values, type]
+                  )
+                }
               />
               {type}
             </label>
