@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { createTransaction } from "../../api/transactions";
 import { fetchAccounts } from "../../api/accounts";
 import { fetchCategories } from "../../api/categories";
+import { toast } from "react-toastify";
 
 export default function AddTransaction() {
   const queryClient = useQueryClient();
@@ -21,6 +22,10 @@ export default function AddTransaction() {
     mutationFn: createTransaction,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      toast.success("Transaction added successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
