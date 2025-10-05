@@ -8,7 +8,7 @@ function EditAccountModal({ account, onClose }) {
 
   const { data: banks = [], isLoading: banksLoading } = useQuery({
     queryKey: ["banks"],
-    queryFn: fetchBanks,
+    queryFn: fetchBanks,ƒ
   });
 
   const mutation = useMutation({
