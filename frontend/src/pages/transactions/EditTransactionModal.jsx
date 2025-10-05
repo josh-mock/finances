@@ -4,6 +4,7 @@ import { updateTransaction } from "../../api/transactions";
 import { fetchAccounts } from "../../api/accounts";
 import { fetchCategories } from "../../api/categories";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
 
 export default function EditTransactionModal({ transaction, onClose }) {
   const queryClient = useQueryClient();
@@ -23,6 +24,10 @@ export default function EditTransactionModal({ transaction, onClose }) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       onClose();
+      toast.success("Transaction updated successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
