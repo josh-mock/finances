@@ -125,7 +125,7 @@ function EditAccountModal({ account, onClose }) {
             </div>
           )}
 
-          <div>
+          <div className="modal__buttons">
             <button
               type="submit"
               disabled={mutation.isLoading}

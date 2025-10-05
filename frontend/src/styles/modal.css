@@ -18,6 +18,12 @@
   animation: fadeInScale 0.25s ease-out;
 }
 
+.modal__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem
+}
+
 @keyframes fadeInScale {
   from {
     opacity: 0;
