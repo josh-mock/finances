@@ -2,7 +2,10 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export const fetchTransactions = async () => {
   const res = await fetch(`${API_URL}/transactions`);
-  if (!res.ok) throw new Error("Failed to fetch transactions");
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.error || "Failed to fetch transactions");
+  }
   return res.json();
 };
 
@@ -12,7 +15,10 @@ export const createTransaction = async (transaction) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(transaction),
   });
-  if (!res.ok) throw new Error("Failed to create transaction");
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.error || "Failed to create transaction");
+  }
   return res.json();
 };
 
@@ -22,7 +28,10 @@ export const updateTransaction = async (id, transaction) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(transaction),
   });
-  if (!res.ok) throw new Error("Failed to update transaction");
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.error || "Failed to update transaction");
+  }
   return res.json();
 };
 
@@ -30,6 +39,9 @@ export const deleteTransaction = async (id) => {
   const res = await fetch(`${API_URL}/transactions/${id}`, {
     method: "DELETE",
   });
-  if (!res.ok) throw new Error("Failed to delete transaction");
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.error || "Failed to delete transaction");
+  }
   return res.json();
 };

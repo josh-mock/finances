@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { updateCategory } from "../../../api/categories";
+import { toast } from "react-toastify";
 
 function EditCategoryModal({ category, onClose }) {
   const queryClient = useQueryClient();
@@ -10,6 +11,10 @@ function EditCategoryModal({ category, onClose }) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
       onClose();
+      toast.success("Category updated successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 

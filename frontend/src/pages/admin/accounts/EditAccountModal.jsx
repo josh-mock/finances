@@ -2,13 +2,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { updateAccount } from "../../../api/accounts";
 import { fetchBanks } from "../../../api/banks";
+import { toast } from "react-toastify";
 
 function EditAccountModal({ account, onClose }) {
   const queryClient = useQueryClient();
 
   const { data: banks = [], isLoading: banksLoading } = useQuery({
     queryKey: ["banks"],
-    queryFn: fetchBanks,ƒ
+    queryFn: fetchBanks,
   });
 
   const mutation = useMutation({
@@ -16,6 +17,10 @@ function EditAccountModal({ account, onClose }) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
       onClose();
+      toast.success("Account updated successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
@@ -27,7 +32,9 @@ function EditAccountModal({ account, onClose }) {
 
   const onSubmit = (data) => {
     mutation.mutate(data, {
-      onSuccess: () => reset(),
+      onSuccess: () => {
+        reset();
+      },
     });
   };
 

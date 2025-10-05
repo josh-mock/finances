@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { updateBank } from "../../../api/banks";
+import { toast } from "react-toastify";
 
 function EditBankModal({ bank, onClose }) {
   const queryClient = useQueryClient();
@@ -10,6 +11,10 @@ function EditBankModal({ bank, onClose }) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["banks"] });
       onClose();
+      toast.success("Bank updated successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
