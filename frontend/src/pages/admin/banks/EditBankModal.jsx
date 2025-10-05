@@ -15,29 +15,54 @@ function EditBankModal({ bank, onClose }) {
 
   const { register, handleSubmit, reset } = useForm({ defaultValues: bank });
 
-  const onSubmit = (data) => mutation.mutate(data, { onSuccess: () => reset() });
+  const onSubmit = (data) =>
+    mutation.mutate(data, { onSuccess: () => reset() });
 
   return (
     <div className="modal-backdrop">
       <div className="modal-content">
         <h4>Edit Bank</h4>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <label>Legal Name</label>
-            <input {...register("legal_name", { required: true })} />
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form__group">
+            <label className="form__label">Legal Name</label>
+            <input
+              className="form__input"
+              {...register("legal_name", { required: true })}
+            />
           </div>
-          <div>
-            <label>Display Name</label>
-            <input {...register("display_name", { required: true })} />
+
+          <div className="form__group">
+            <label className="form__label">Display Name</label>
+            <input
+              className="form__input"
+              {...register("display_name", { required: true })}
+            />
           </div>
-          <div>
-            <label>Address</label>
-            <textarea {...register("address", { required: true })} />
+
+          <div className="form__group">
+            <label className="form__label">Address</label>
+            <textarea
+              className="form__textarea"
+              {...register("address", { required: true })}
+            />
           </div>
-          <button type="submit" disabled={mutation.isLoading}>
-            {mutation.isLoading ? "Saving..." : "Save"}
-          </button>
-          <button type="button" onClick={onClose}>Cancel</button>
+
+          <div className="modal__buttons">
+            <button
+              type="submit"
+              disabled={mutation.isLoading}
+              className="form__button"
+            >
+              {mutation.isLoading ? "Saving..." : "Save"}
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="form__button--secondary"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </div>
