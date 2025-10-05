@@ -1,6 +1,11 @@
-import React from "react";
 import TransactionsTable from "./TransactionsTable";
+import AddTransaction from "./AddTransaction";
 
 export default function Transactions() {
-  return <TransactionsTable />;
+  return (
+    <>
+      <TransactionsTable />
+      <AddTransaction />
+    </>
+  );
 }

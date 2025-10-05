@@ -21,3 +21,25 @@ export const getAllTransactions = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const createTransaction = async (req, res) => {
+  try {
+    const { date, amount, description, type, account_id, category_id } =
+      req.body;
+
+    const result = await pool.query(
+      `INSERT INTO transactions (
+        date, 
+        amount, 
+        description, 
+        type, 
+        account_id, 
+        category_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [date, amount, description, type, account_id, category_id]
+    );
+
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
