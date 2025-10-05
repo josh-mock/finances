@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { createBank } from "../../../api/banks";
+import { toast } from "react-toastify";
 
 function AddBank() {
   const queryClient = useQueryClient();
@@ -8,6 +9,10 @@ function AddBank() {
     mutationFn: createBank,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["banks"] });
+      toast.success("Bank added successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 

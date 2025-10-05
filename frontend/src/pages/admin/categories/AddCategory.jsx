@@ -9,6 +9,10 @@ function AddCategory() {
     mutationFn: createCategory,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
+      toast.success("Category added successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
