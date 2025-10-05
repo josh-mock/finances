@@ -15,3 +15,11 @@ export const createTransaction = async (transaction) => {
   if (!res.ok) throw new Error("Failed to create transaction");
   return res.json();
 };
+
+export const deleteTransaction = async (id) => {
+  const res = await fetch(`${API_URL}/transactions/${id}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("Failed to delete transaction");
+  return res.json();
+};

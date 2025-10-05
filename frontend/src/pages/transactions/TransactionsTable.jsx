@@ -10,6 +10,8 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { fetchTransactions } from "../../api/transactions";
 import TransactionFilters from "./transactionFilters";
+import EditTransactionModal from "./EditTransactionModal";
+import DeleteTransactionButton from "./DeleteTransactionButton";
 
 export default function TransactionsTable() {
   const { data: transactions = [] } = useQuery({
@@ -19,10 +21,17 @@ export default function TransactionsTable() {
 
   const [columnFilters, setColumnFilters] = useState([]);
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 });
+  const [editingTransaction, setEditingTransaction] = useState(null);
 
-  const accountOptions = Array.from(new Set(transactions.map(t => t.account_name))).sort();
-  const categoryOptions = Array.from(new Set(transactions.map(t => t.category))).sort();
-  const typeOptions = Array.from(new Set(transactions.map(t => t.type))).sort();
+  const accountOptions = Array.from(
+    new Set(transactions.map((t) => t.account_name))
+  ).sort();
+  const categoryOptions = Array.from(
+    new Set(transactions.map((t) => t.category))
+  ).sort();
+  const typeOptions = Array.from(
+    new Set(transactions.map((t) => t.type))
+  ).sort();
 
   const columns = [
     {
@@ -41,7 +50,10 @@ export default function TransactionsTable() {
       accessorKey: "amount",
       header: "Amount",
       cell: ({ getValue }) =>
-        `£${(getValue() / 100).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+        `£${(getValue() / 100).toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}`,
       filterFn: (row, columnId, value) => {
         if (!value?.min && !value?.max) return true;
         const amount = row.getValue(columnId);
@@ -55,26 +67,47 @@ export default function TransactionsTable() {
       header: "Description",
       filterFn: (row, columnId, value) => {
         if (!value) return true;
-        return row.getValue(columnId).toLowerCase().includes(value.toLowerCase());
+        return row
+          .getValue(columnId)
+          .toLowerCase()
+          .includes(value.toLowerCase());
       },
     },
     {
       accessorKey: "type",
       header: "Type",
       filterFn: (row, columnId, filterValues) =>
-        filterValues.length === 0 || filterValues.includes(row.getValue(columnId)),
+        filterValues.length === 0 ||
+        filterValues.includes(row.getValue(columnId)),
     },
     {
       accessorKey: "account_name",
       header: "Account",
       filterFn: (row, columnId, filterValues) =>
-        filterValues.length === 0 || filterValues.includes(row.getValue(columnId)),
+        filterValues.length === 0 ||
+        filterValues.includes(row.getValue(columnId)),
     },
     {
       accessorKey: "category",
       header: "Category",
       filterFn: (row, columnId, filterValues) =>
-        filterValues.length === 0 || filterValues.includes(row.getValue(columnId)),
+        filterValues.length === 0 ||
+        filterValues.includes(row.getValue(columnId)),
+    },
+    {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row }) => (
+        <div className="table__actions">
+          <button
+            className="table__button"
+            onClick={() => setEditingTransaction(row.original)}
+          >
+            Edit
+          </button>
+          <DeleteTransactionButton id={row.original.id} />
+        </div>
+      ),
     },
   ];
 
@@ -90,10 +123,14 @@ export default function TransactionsTable() {
   });
 
   const handleFilterChange = (id, value) => {
-    setColumnFilters(prev => [...prev.filter(f => f.id !== id), { id, value }]);
+    setColumnFilters((prev) => [
+      ...prev.filter((f) => f.id !== id),
+      { id, value },
+    ]);
   };
 
-  if (!transactions.length) return <div className="table__empty">No transactions.</div>;
+  if (!transactions.length)
+    return <div className="table__empty">No transactions.</div>;
 
   return (
     <div className="table-container">
@@ -107,20 +144,23 @@ export default function TransactionsTable() {
 
       <table className="table">
         <thead>
-          {table.getHeaderGroups().map(hg => (
+          {table.getHeaderGroups().map((hg) => (
             <tr key={hg.id}>
-              {hg.headers.map(header => (
+              {hg.headers.map((header) => (
                 <th key={header.id}>
-                  {flexRender(header.column.columnDef.header, header.getContext())}
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
                 </th>
               ))}
             </tr>
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map(row => (
+          {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
-              {row.getVisibleCells().map(cell => (
+              {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
@@ -129,6 +169,13 @@ export default function TransactionsTable() {
           ))}
         </tbody>
       </table>
+
+      {editingTransaction && (
+        <EditTransactionModal
+          transaction={editingTransaction}
+          onClose={() => setEditingTransaction(null)}
+        />
+      )}
 
       <div className="pagination">
         <button
@@ -144,7 +191,8 @@ export default function TransactionsTable() {
           {"<"}
         </button>
         <span>
-          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+          Page {table.getState().pagination.pageIndex + 1} of{" "}
+          {table.getPageCount()}
         </span>
         <button
           onClick={() => table.nextPage()}
