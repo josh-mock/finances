@@ -10,6 +10,7 @@ import "./styles/tables.css";
 import "./styles/forms.css";
 import "./styles/filters.css";
 import "./styles/pagination.css";
+import "./styles/modal.css";
 
 const queryClient = new QueryClient();
 

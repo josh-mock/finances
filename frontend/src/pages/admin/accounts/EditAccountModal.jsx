@@ -37,24 +37,31 @@ function EditAccountModal({ account, onClose }) {
     <div className="modal-backdrop">
       <div className="modal-content">
         <h2>Edit Account</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <label>Account Name</label>
-            <input {...register("account_name", { required: true })} />
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form__group">
+            <label className="form__label">Account Name</label>
+            <input
+              className="form__input"
+              {...register("account_name", { required: true })}
+            />
           </div>
 
-          <div>
-            <label>Account Type</label>
-            <select {...register("account_type", { required: true })}>
+          <div className="form__group">
+            <label className="form__label">Account Type</label>
+            <select
+              className="form__select"
+              {...register("account_type", { required: true })}
+            >
               <option value="bank">Bank</option>
               <option value="credit">Credit</option>
             </select>
           </div>
 
           {accountType === "bank" && (
-            <div>
-              <label>Bank</label>
+            <div className="form__group">
+              <label className="form__label">Bank</label>
               <select
+                className="form__select"
                 {...register("bank_id", { required: false })}
                 disabled={banksLoading}
               >
@@ -69,15 +76,19 @@ function EditAccountModal({ account, onClose }) {
           )}
 
           {accountType === "bank" && (
-            <div>
-              <label>Account Number</label>
-              <input {...register("account_number", { required: false })} />
+            <div className="form__group">
+              <label className="form__label">Account Number</label>
+              <input
+                className="form__input"
+                {...register("account_number", { required: false })}
+              />
             </div>
           )}
 
-          <div>
-            <label>Year Opened</label>
+          <div className="form__group">
+            <label className="form__label">Year Opened</label>
             <input
+              className="form__input"
               type="number"
               {...register("year_opened", {
                 required: true,
@@ -93,17 +104,16 @@ function EditAccountModal({ account, onClose }) {
             <label className="form__label">ISA</label>
           </div>
 
-          <div>
-            <label>
-              <input type="checkbox" {...register("is_closed")} />
-              Account closed
-            </label>
+          <div className="form__checkbox">
+            <input type="checkbox" {...register("is_closed")} />
+            <label className="form__label">Account closed</label>
           </div>
 
           {isClosed && (
-            <div>
-              <label>Year Closed</label>
+            <div className="form__group">
+              <label className="form__label">Year Closed</label>
               <input
+                className="form__input"
                 type="number"
                 {...register("year_closed", {
                   required: false,
@@ -115,12 +125,22 @@ function EditAccountModal({ account, onClose }) {
             </div>
           )}
 
-          <button type="submit" disabled={mutation.isLoading}>
-            {mutation.isLoading ? "Saving..." : "Save Changes"}
-          </button>
-          <button type="button" onClick={onClose}>
-            Cancel
-          </button>
+          <div>
+            <button
+              type="submit"
+              disabled={mutation.isLoading}
+              className="form__button"
+            >
+              {mutation.isLoading ? "Saving..." : "Save Changes"}
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="form__button--secondary"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </div>
