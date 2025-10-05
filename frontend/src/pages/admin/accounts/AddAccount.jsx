@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { createAccount } from "../../../api/accounts";
+import { toast } from "react-toastify";
 import { fetchBanks } from "../../../api/banks";
 
 function AddAccount() {
@@ -15,17 +16,30 @@ function AddAccount() {
     mutationFn: createAccount,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
+      toast.success("Account added successfully");
+      reset({
+        account_type: "bank",
+        account_name: "",
+        bank_id: "",
+        account_number: "",
+        year_opened: "",
+        is_isa: false,
+        is_closed: false,
+        year_closed: "",
+      });
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
   const { register, handleSubmit, reset, watch } = useForm({
-    defaultValues: {
-      account_type: "bank",
-    },
+    defaultValues: { account_type: "bank" },
   });
 
   const accountType = watch("account_type");
   const isClosed = watch("is_closed");
+  const currentYear = new Date().getFullYear();
 
   const onSubmit = (data) => {
     const payload = {
@@ -41,22 +55,8 @@ function AddAccount() {
       }),
     };
 
-    mutation.mutate(payload, {
-      onSuccess: () =>
-        reset({
-          account_type: "bank",
-          account_name: "",
-          bank_id: "",
-          account_number: "",
-          year_opened: "",
-          is_isa: false,
-          is_closed: false,
-          year_closed: "",
-        }),
-    });
+    mutation.mutate(payload);
   };
-
-  const currentYear = new Date().getFullYear();
 
   return (
     <>
@@ -82,31 +82,28 @@ function AddAccount() {
         </div>
 
         {accountType === "bank" && (
-          <div className="form__group">
-            <label className="form__label">Bank</label>
-            <select
-              className="form__select"
-              {...register("bank_id", { required: false })}
-              disabled={banksLoading}
-            >
-              <option value="">Select a bank</option>
-              {banks.map((bank) => (
-                <option key={bank.id} value={bank.id}>
-                  {bank.display_name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
+          <>
+            <div className="form__group">
+              <label className="form__label">Bank</label>
+              <select
+                className="form__select"
+                {...register("bank_id")}
+                disabled={banksLoading}
+              >
+                <option value="">Select a bank</option>
+                {banks.map((bank) => (
+                  <option key={bank.id} value={bank.id}>
+                    {bank.display_name}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-        {accountType === "bank" && (
-          <div className="form__group">
-            <label className="form__label">Account Number</label>
-            <input
-              className="form__input"
-              {...register("account_number", { required: false })}
-            />
-          </div>
+            <div className="form__group">
+              <label className="form__label">Account Number</label>
+              <input className="form__input" {...register("account_number")} />
+            </div>
+          </>
         )}
 
         <div className="form__group">
@@ -141,7 +138,6 @@ function AddAccount() {
               type="number"
               className="form__input"
               {...register("year_closed", {
-                required: false,
                 min: 1900,
                 max: currentYear,
                 valueAsNumber: true,
