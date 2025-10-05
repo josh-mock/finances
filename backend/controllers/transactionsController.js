@@ -44,6 +44,36 @@ export const createTransaction = async (req, res) => {
   }
 };
 
+export const updateTransaction = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { date, amount, description, type, account_id, category_id } =
+      req.body;
+
+    const result = await pool.query(
+      `UPDATE transactions
+         SET
+          date = $1, 
+          amount = $2, 
+          description = $3, 
+          type = $4, 
+          account_id = $5, 
+          category_id = $6 
+        WHERE id = $7 
+        RETURNING *`,
+      [date, amount, description, type, account_id, category_id, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Transaction not found" });
+    }
+
+    res.json({ message: "Transaction deleted" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 export const deleteTransaction = async (req, res) => {
   try {
     const { id } = req.params;
