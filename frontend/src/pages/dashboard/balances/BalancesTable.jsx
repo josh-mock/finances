@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchBalances } from "../../../api/dashboard";
+import formatCurrency from "../../../lib/formatCurrency";
 
 export default function BalancesTable() {
   const { data: balances = [] } = useQuery({
@@ -9,7 +10,7 @@ export default function BalancesTable() {
 
   return (
     <div>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Account Name</th>
@@ -23,7 +24,14 @@ export default function BalancesTable() {
             .map((balance) => (
               <tr key={balance.account_id}>
                 <td>{balance.account_name}</td>
-                <td>{`£${Number(balance.balance / 100).toLocaleString()}`}</td>
+                <td>
+                  <div className="currency">
+                    <span className="currency__symbol">£</span>
+                    <span className="currency__value">
+                      {formatCurrency(balance.balance)}
+                    </span>
+                  </div>
+                </td>
                 <td>
                   {new Date(balance.last_transaction).toLocaleDateString()}
                 </td>
