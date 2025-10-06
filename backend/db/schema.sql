@@ -31,9 +31,3 @@ CREATE TABLE transactions (
     category_id INTEGER REFERENCES categories(id),
     type TEXT NOT NULL CHECK (type IN ('Income', 'Expense', 'Transfer In', 'Transfer Out'))
 );
-
-CREATE TABLE budget (
-    id SERIAL PRIMARY KEY,
-    category_id INTEGER REFERENCES categories(id) UNIQUE NOT NULL,
-    amount INTEGER NOT NULL
-);
