@@ -1,4 +1,3 @@
-CREATE MATERIALIZED VIEW net_income_mv AS
 SELECT 'this_month' AS period,
        SUM(CASE WHEN type = 'Income' THEN amount ELSE 0 END) AS income,
        SUM(CASE WHEN type = 'Expense' THEN amount ELSE 0 END) AS expenditure,

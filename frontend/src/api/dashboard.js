@@ -17,3 +17,12 @@ export const fetchBalancesGraph = async () => {
   }
   return res.json();
 };
+
+export const fetchNetTable = async () => {
+  const res = await fetch(`${API_URL}/dashboard/net/table`);
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.error || "Failed to fetch net table");
+  }
+  return res.json();
+};
