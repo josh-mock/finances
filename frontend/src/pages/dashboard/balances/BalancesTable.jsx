@@ -8,13 +8,12 @@ export default function BalancesTable() {
     queryFn: fetchBalances,
   });
 
-  const { total_balance } = balances[0];
+  const total_balance = balances[0]?.total_balance || 0;
   const accounts = balances
     .map(({ total_balance, ...rest }) => rest)
     .sort((a, b) => a.account_name.localeCompare(b.account_name));
 
-  if (!balances.length)
-    return <div className="table__empty">No data.</div>;
+  if (!balances.length) return <div className="table__empty">No data.</div>;
 
   return (
     <div>
