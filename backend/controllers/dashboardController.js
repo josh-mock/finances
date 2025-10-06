@@ -121,3 +121,42 @@ export const getNetTable = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const getNetGraph = async (req, res) => {
+  try {
+    const { period = "day" } = req.query; // default to daily
+
+    // Validate input to avoid SQL injection
+    const validPeriods = ["day", "week", "month", "year"];
+    if (!validPeriods.includes(period)) {
+      return res.status(400).json({ error: "Invalid period" });
+    }
+
+    const result = await pool.query(
+      `
+      SELECT
+        period,
+        SUM(net_income) OVER (ORDER BY period) AS cumulative_net_income
+      FROM (
+        SELECT
+          DATE_TRUNC($1, date) AS period,
+          SUM(
+            CASE 
+              WHEN type = 'Income' THEN amount
+              WHEN type = 'Expense' THEN -amount
+              ELSE 0 
+            END
+          ) AS net_income
+        FROM transactions
+        WHERE type IN ('Income', 'Expense')
+        GROUP BY DATE_TRUNC($1, date)
+      ) AS aggregated;
+    `,
+      [period]
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

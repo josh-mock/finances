@@ -26,3 +26,12 @@ export const fetchNetTable = async () => {
   }
   return res.json();
 };
+
+export const fetchNetGraph = async (period = "day") => {
+  const res = await fetch(`${API_URL}/dashboard/net/graph?period=${period}`);
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.error || "Failed to fetch net graph");
+  }
+  return res.json();
+};
