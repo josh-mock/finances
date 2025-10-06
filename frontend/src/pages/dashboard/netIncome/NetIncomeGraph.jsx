@@ -5,7 +5,7 @@ import "chart.js/auto";
 import { fetchNetGraph } from "../../../api/dashboard";
 
 export default function NetIncomeGraph() {
-  const [period, setPeriod] = useState("day"); // default period
+  const [period, setPeriod] = useState("day");
 
   const { data: netIncomeGraph = [] } = useQuery({
     queryKey: ["netIncomeGraph", period],
