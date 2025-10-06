@@ -13,6 +13,7 @@ import "./styles/forms.css";
 import "./styles/filters.css";
 import "./styles/pagination.css";
 import "./styles/modal.css";
+import "./styles/dashboard.css";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +21,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <App />
-      <ToastContainer /> {/* Mounted once, global for entire app */}
+      <ToastContainer />
     </QueryClientProvider>
   </StrictMode>
 );

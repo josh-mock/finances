@@ -1,19 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchBalances } from "../../../api/dashboard";
+import { fetchBalancesTable } from "../../../api/dashboard";
 import formatCurrency from "../../../lib/formatCurrency";
 
 export default function BalancesTable() {
-  const { data: balances = [] } = useQuery({
-    queryKey: ["balances"],
-    queryFn: fetchBalances,
+  const { data: balancesTable = [] } = useQuery({
+    queryKey: ["balancesTable"],
+    queryFn: fetchBalancesTable,
   });
 
-  const total_balance = balances[0]?.total_balance || 0;
-  const accounts = balances
+  if (!balancesTable.length)
+    return <div className="table__empty">No data.</div>;
+
+  const total_balance = balancesTable[0]?.total_balance || 0;
+  const accounts = balancesTable
     .map(({ total_balance, ...rest }) => rest)
     .sort((a, b) => a.account_name.localeCompare(b.account_name));
-
-  if (!balances.length) return <div className="table__empty">No data.</div>;
 
   return (
     <div>

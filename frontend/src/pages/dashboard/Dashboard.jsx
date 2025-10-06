@@ -1,9 +1,10 @@
-import BalancesTable from "./balances/balancesTable";
+import Balances from "./balances/Balances";
 
 export default function Dashboard() {
   return (
-    <div>
-      <BalancesTable />
+    <div className="dashboard__container">
+      <h2 className="dashboard__title">Dashboard</h2>
+      <Balances />
     </div>
   );
 }
