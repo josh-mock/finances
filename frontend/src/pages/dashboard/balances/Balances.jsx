@@ -4,8 +4,8 @@ import BalancesGraph from "./BalancesGraph";
 export default function Balances() {
   return (
     <>
-      <h3 className="dashboard__section-title">Balances</h3>
-      <div className="dashboard__section">
+      <h3>Balances</h3>
+      <div>
         <BalancesTable />
         <BalancesGraph />
       </div>

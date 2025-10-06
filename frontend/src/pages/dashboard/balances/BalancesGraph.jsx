@@ -28,14 +28,7 @@ export default function BalancesGraph() {
   };
 
   const chartOptions = {
-    maintainAspectRatio: false, // fill container height
     plugins: {
-      legend: {
-        position: "right",
-        labels: {
-          padding: 10,
-        },
-      },
       tooltip: {
         callbacks: {
           label: function (context) {
@@ -43,9 +36,6 @@ export default function BalancesGraph() {
           },
         },
       },
-    },
-    layout: {
-      padding: 0,
     },
   };
 
