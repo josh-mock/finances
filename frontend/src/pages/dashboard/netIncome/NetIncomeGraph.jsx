@@ -41,7 +41,7 @@ export default function NetIncomeGraph() {
           },
         },
       },
-      legend: { display: true },
+      legend: { display: false },
     },
   };
 
