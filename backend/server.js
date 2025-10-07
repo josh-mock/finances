@@ -6,6 +6,7 @@ import bankRoutes from "./routes/banks.js";
 import categoryRoutes from "./routes/categories.js";
 import dashboardRoutes from "./routes/dashboard.js";
 import transactionRoutes from "./routes/transactions.js";
+import budgetRoutes from "./routes/budget.js";
 dotenv.config();
 
 const port = 3000;
@@ -20,6 +21,7 @@ app.use("/banks", bankRoutes);
 app.use("/accounts", accountRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/transactions", transactionRoutes);
+app.use("/budget", budgetRoutes);
 
 // DASHBOARD ROUTES
 app.use("/dashboard", dashboardRoutes);
