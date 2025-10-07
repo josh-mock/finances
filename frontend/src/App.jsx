@@ -1,8 +1,9 @@
 import Admin from "./pages/admin/admin";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Layout from "./components/layout/layout";
+import Layout from "./components/layout/Layout";
 import Transactions from "./pages/transactions/Transactions";
+import Budget from "./pages/Budget";
 export default function App() {
   return (
     <Router>
@@ -11,6 +12,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/transactions" element={<Transactions />} />
+          <Route path="/budget" element={<Budget />} />
         </Route>
       </Routes>
     </Router>

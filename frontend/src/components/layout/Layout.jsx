@@ -14,14 +14,22 @@ export default function Layout() {
                   Dashboard
                 </Link>
               </li>
+
               <li className="layout__nav-item">
                 <Link className="layout__nav-link" to="/admin">
                   Admin
                 </Link>
               </li>
+
               <li className="layout__nav-item">
                 <Link className="layout__nav-link" to="/transactions">
                   Transactions
+                </Link>
+              </li>
+
+              <li className="layout__nav-item">
+                <Link className="layout__nav-link" to="/budget">
+                  Budget
                 </Link>
               </li>
             </ul>

@@ -2,7 +2,9 @@ import pool from "../db/db.js";
 
 export const getAllCategories = async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM categories");
+    const result = await pool.query(
+      "SELECT * FROM categories ORDER BY category"
+    );
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });

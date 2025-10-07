@@ -1,11 +1,11 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import bankRoutes from "./routes/banks.js";
 import accountRoutes from "./routes/accounts.js";
+import bankRoutes from "./routes/banks.js";
 import categoryRoutes from "./routes/categories.js";
-import transactionRoutes from "./routes/transactions.js";
 import dashboardRoutes from "./routes/dashboard.js";
+import transactionRoutes from "./routes/transactions.js";
 dotenv.config();
 
 const port = 3000;
