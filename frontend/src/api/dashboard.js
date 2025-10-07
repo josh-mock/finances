@@ -35,3 +35,12 @@ export const fetchNetGraph = async (period = "day") => {
   }
   return res.json();
 };
+
+export const fetchBudgetTable = async () => {
+  const res = await fetch(`${API_URL}/dashboard/budget/table`);
+  if (!res.ok) {
+    const data = await res.json();
+    throw new Error(data.error || "Failed to fetch budget table");
+  }
+  return res.json();
+};

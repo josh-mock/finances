@@ -124,9 +124,8 @@ export const getNetTable = async (req, res) => {
 
 export const getNetGraph = async (req, res) => {
   try {
-    const { period = "day" } = req.query; // default to daily
+    const { period = "day" } = req.query;
 
-    // Validate input to avoid SQL injection
     const validPeriods = ["day", "week", "month", "year"];
     if (!validPeriods.includes(period)) {
       return res.status(400).json({ error: "Invalid period" });
@@ -154,6 +153,41 @@ export const getNetGraph = async (req, res) => {
     `,
       [period]
     );
+
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const getBudgetTable = async (req, res) => {
+  try {
+    const result = await pool.query(`
+      WITH month_expenses AS (
+        SELECT
+          t.category_id,
+          SUM(t.amount) AS spent_this_month
+        FROM transactions t
+        WHERE t.type = 'Expense'
+          AND DATE_TRUNC('month', t.date) = DATE_TRUNC('month', CURRENT_DATE)
+        GROUP BY t.category_id
+      )
+
+      SELECT
+        COALESCE(c.category, 'Total') AS category,
+        SUM(c.budgeted_amount) AS budgeted_amount,
+        SUM(COALESCE(me.spent_this_month, 0)) AS spent_this_month,
+        SUM(c.budgeted_amount) - SUM(COALESCE(me.spent_this_month, 0)) AS remaining
+      FROM categories c
+      LEFT JOIN month_expenses me
+        ON me.category_id = c.id
+      WHERE c.include_in_budget = true
+      GROUP BY GROUPING SETS ((c.id, c.category, c.budgeted_amount), ())
+      HAVING SUM(c.budgeted_amount) <> 0 OR SUM(COALESCE(me.spent_this_month, 0)) <> 0
+      ORDER BY
+        CASE WHEN GROUPING(c.id) = 1 THEN 2 ELSE 1 END,
+        c.category;
+    `);
 
     res.json(result.rows);
   } catch (err) {
