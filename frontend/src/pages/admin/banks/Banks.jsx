@@ -1,5 +1,5 @@
-import BanksTable from "./BanksTable";
 import AddBank from "./AddBank";
+import BanksTable from "./BanksTable";
 
 export default function Banks() {
   return (

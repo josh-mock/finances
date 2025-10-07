@@ -1,5 +1,5 @@
-import BudgetTable from "./BudgetTable";
 import BudgetGraph from "./BudgetGraph";
+import BudgetTable from "./BudgetTable";
 
 export default function Budget() {
   return (

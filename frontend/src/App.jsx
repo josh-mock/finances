@@ -1,9 +1,9 @@
-import Admin from "./pages/admin/admin";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Home from "./pages/Home";
 import Layout from "./components/layout/Layout";
-import Transactions from "./pages/transactions/Transactions";
+import Admin from "./pages/admin/admin";
 import Budget from "./pages/Budget";
+import Home from "./pages/Home";
+import Transactions from "./pages/transactions/Transactions";
 export default function App() {
   return (
     <Router>

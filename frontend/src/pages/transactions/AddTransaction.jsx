@@ -1,9 +1,9 @@
-import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { createTransaction } from "../../api/transactions";
+import { toast } from "react-toastify";
 import { fetchAccounts } from "../../api/accounts";
 import { fetchCategories } from "../../api/categories";
-import { toast } from "react-toastify";
+import { createTransaction } from "../../api/transactions";
 
 export default function AddTransaction() {
   const queryClient = useQueryClient();
@@ -32,7 +32,6 @@ export default function AddTransaction() {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    // Ensure we have a proper number and round to cents
     const amountCents = Math.round(Number(data.amount) * 100);
 
     const payload = { ...data, amount: amountCents };

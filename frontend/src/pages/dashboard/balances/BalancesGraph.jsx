@@ -1,7 +1,7 @@
-import { Doughnut } from "react-chartjs-2";
 import { useQuery } from "@tanstack/react-query";
-import { fetchBalancesGraph } from "../../../api/dashboard";
 import "chart.js/auto";
+import { Doughnut } from "react-chartjs-2";
+import { fetchBalancesGraph } from "../../../api/dashboard";
 
 export default function BalancesGraph() {
   const { data: balancesGraph = [] } = useQuery({

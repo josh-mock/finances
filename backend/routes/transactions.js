@@ -1,8 +1,8 @@
 import express from "express";
 import {
-  getAllTransactions,
   createTransaction,
   deleteTransaction,
+  getAllTransactions,
   updateTransaction,
 } from "../controllers/transactionsController.js";
 

@@ -1,5 +1,5 @@
-import BalancesTable from "./balancesTable";
 import BalancesGraph from "./BalancesGraph";
+import BalancesTable from "./balancesTable";
 
 export default function Balances() {
   return (

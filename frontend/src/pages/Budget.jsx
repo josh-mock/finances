@@ -1,8 +1,8 @@
-import { fetchBudget, updateBudget } from "../api/budget";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useForm, useWatch } from "react-hook-form";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { toast } from "react-toastify";
+import { fetchBudget, updateBudget } from "../api/budget";
 import Currency from "../components/Currency/Currency";
 
 export default function Budget() {

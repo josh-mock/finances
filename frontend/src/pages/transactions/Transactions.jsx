@@ -1,5 +1,5 @@
-import TransactionsTable from "./TransactionsTable";
 import AddTransaction from "./AddTransaction";
+import TransactionsTable from "./TransactionsTable";
 
 export default function Transactions() {
   return (

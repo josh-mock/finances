@@ -1,6 +1,6 @@
 import Balances from "./balances/Balances";
-import NetIncome from "./netIncome/NetIncome";
 import Budget from "./Budget/Budget";
+import NetIncome from "./netIncome/NetIncome";
 
 export default function Dashboard() {
   return (

@@ -9,9 +9,9 @@ import {
 import dayjs from "dayjs";
 import { useState } from "react";
 import { fetchTransactions } from "../../api/transactions";
-import TransactionFilters from "./transactionFilters";
-import EditTransactionModal from "./EditTransactionModal";
 import DeleteTransactionButton from "./DeleteTransactionButton";
+import EditTransactionModal from "./EditTransactionModal";
+import TransactionFilters from "./transactionFilters";
 
 export default function TransactionsTable() {
   const { data: transactions = [] } = useQuery({

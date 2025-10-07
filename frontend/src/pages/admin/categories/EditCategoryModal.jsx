@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { updateCategory } from "../../../api/categories";
 import { toast } from "react-toastify";
+import { updateCategory } from "../../../api/categories";
 
 function EditCategoryModal({ category, onClose }) {
   const queryClient = useQueryClient();

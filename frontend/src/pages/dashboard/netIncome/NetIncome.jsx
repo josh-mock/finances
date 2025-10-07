@@ -1,5 +1,5 @@
-import NetIncomeTable from "./NetIncomeTable";
 import NetIncomeGraph from "./NetIncomeGraph";
+import NetIncomeTable from "./NetIncomeTable";
 
 export default function NetIncome() {
   return (

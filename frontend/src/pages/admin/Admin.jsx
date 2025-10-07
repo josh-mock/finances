@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Banks from "./banks/Banks";
 import Accounts from "./accounts/Accounts";
+import Banks from "./banks/Banks";
 import Categories from "./categories/Categories";
 
 function Admin() {

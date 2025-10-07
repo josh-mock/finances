@@ -1,10 +1,10 @@
-import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import dayjs from "dayjs";
 import { useForm } from "react-hook-form";
-import { updateTransaction } from "../../api/transactions";
+import { toast } from "react-toastify";
 import { fetchAccounts } from "../../api/accounts";
 import { fetchCategories } from "../../api/categories";
-import dayjs from "dayjs";
-import { toast } from "react-toastify";
+import { updateTransaction } from "../../api/transactions";
 
 export default function EditTransactionModal({ transaction, onClose }) {
   const queryClient = useQueryClient();
@@ -42,7 +42,6 @@ export default function EditTransactionModal({ transaction, onClose }) {
   });
 
   const onSubmit = (data) => {
-    // Ensure we have a proper number and round to cents
     const amountCents = Math.round(Number(data.amount) * 100);
 
     const payload = { ...data, amount: amountCents };

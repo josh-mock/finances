@@ -1,63 +1,45 @@
-/* -------------------------------------------------------------
-   BudgetGraph – toggle between “Values” and “% of Budget”
-   ------------------------------------------------------------- */
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
+import { useState } from "react";
+import { Bar } from "react-chartjs-2";
 
 import { fetchBudgetTable } from "../../../api/dashboard";
 
 export default function BudgetGraph() {
-  /* ---------------------------------------------------------
-     1️⃣  Load the raw data once
-     --------------------------------------------------------- */
   const { data: budgetTable = [] } = useQuery({
     queryKey: ["budgetTable"],
     queryFn: fetchBudgetTable,
   });
 
-  /* ---------------------------------------------------------
-     2️⃣  UI state – which representation the user wants
-     --------------------------------------------------------- */
   const [mode, setMode] = useState("values");
 
-  /* ---------------------------------------------------------
-     3️⃣  Helper – turn the raw rows into a uniform shape
-        (so we don’t repeat the mapping logic twice)
-     --------------------------------------------------------- */
   const rows = budgetTable.map((b) => ({
-    label: b.category, // X‑axis label
-    budget: (b.budgeted_amount ?? 0) / 100, // £
-    spent: (b.spent_this_month ?? 0) / 100, // £
+    label: b.category,
+    budget: (b.budgeted_amount ?? 0) / 100,
+    spent: (b.spent_this_month ?? 0) / 100,
   }));
 
-  /* ---------------------------------------------------------
-     4️⃣  Build **chartData** depending on the selected mode
-     --------------------------------------------------------- */
   const chartData = (() => {
     if (mode === "values") {
-      // ---- Values view (raw £) ---------------------------------
       return {
         labels: rows.map((r) => r.label),
         datasets: [
           {
             label: "Budgeted",
             data: rows.map((r) => r.budget),
-            backgroundColor: "rgba(54, 162, 235, 0.7)", // blue
+            backgroundColor: "rgba(54, 162, 235, 0.7)",
             stack: "budget",
           },
           {
             label: "Spent",
             data: rows.map((r) => r.spent),
-            backgroundColor: "rgba(255, 99, 132, 0.7)", // red
+            backgroundColor: "rgba(255, 99, 132, 0.7)",
             stack: "budget",
           },
         ],
       };
     }
 
-    // ---- Percentage view (stacked 100 %) --------------------
     const percentRows = rows.map((r) => {
       const total = r.budget === 0 ? 0 : r.budget;
       const spentPct = total === 0 ? 0 : (r.spent / total) * 100;
@@ -71,22 +53,19 @@ export default function BudgetGraph() {
         {
           label: "Spent",
           data: percentRows.map((r) => r.spentPct),
-          backgroundColor: "rgba(255, 99, 132, 0.7)", // red
+          backgroundColor: "rgba(255, 99, 132, 0.7)",
           stack: "percent",
         },
         {
           label: "Remaining",
           data: percentRows.map((r) => r.remainPct),
-          backgroundColor: "rgba(54, 162, 235, 0.7)", // blue
+          backgroundColor: "rgba(54, 162, 235, 0.7)",
           stack: "percent",
         },
       ],
     };
   })();
 
-  /* ---------------------------------------------------------
-     5️⃣  Build **chartOptions** – they differ only in the Y‑axis
-     --------------------------------------------------------- */
   const chartOptions = (() => {
     const base = {
       responsive: true,
@@ -96,7 +75,6 @@ export default function BudgetGraph() {
             label: (context) => {
               const value = context.parsed.y ?? context.raw;
               if (mode === "values") {
-                // raw £ formatting
                 return `${context.dataset.label}: £${value.toLocaleString(
                   undefined,
                   {
@@ -105,7 +83,6 @@ export default function BudgetGraph() {
                   }
                 )}`;
               }
-              // percentage formatting
               return `${context.dataset.label}: ${value.toFixed(1)} %`;
             },
           },
@@ -126,7 +103,6 @@ export default function BudgetGraph() {
             stacked: true,
             title: { display: true, text: "Amount (£)" },
             ticks: {
-              // £ with commas
               callback: (v) =>
                 `£${Number(v).toLocaleString(undefined, {
                   minimumFractionDigits: 0,
@@ -138,7 +114,6 @@ export default function BudgetGraph() {
       };
     }
 
-    // percentage mode
     return {
       ...base,
       scales: {
@@ -159,12 +134,8 @@ export default function BudgetGraph() {
     };
   })();
 
-  /* ---------------------------------------------------------
-     6️⃣  Render the toggle UI + the chart
-     --------------------------------------------------------- */
   return (
     <div>
-      {/* ----- Toggle --------------------------------------------------- */}
       <label>View:</label>
       <select
         value={mode}
@@ -175,7 +146,6 @@ export default function BudgetGraph() {
         <option value="percent">% of Budget</option>
       </select>
 
-      {/* ----- Chart ---------------------------------------------------- */}
       <Bar data={chartData} options={chartOptions} />
     </div>
   );

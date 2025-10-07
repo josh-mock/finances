@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import EditBankModal from "./EditBankModal";
-import DeleteBankButton from "./DeleteBankButton";
+import { useState } from "react";
 import { fetchBanks } from "../../../api/banks";
+import DeleteBankButton from "./DeleteBankButton";
+import EditBankModal from "./EditBankModal";
 
 export default function BanksTable() {
   const { data: banks = [] } = useQuery({
