@@ -1,0 +1,12 @@
+.currency {
+  display: flex;
+  justify-content: space-between;
+  font-family: monospace;
+}
+
+.currency__value {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  flex-grow: 1;
+}
+ 

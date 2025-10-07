@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchNetTable } from "../../../api/dashboard";
-import Currency from "../../../components/Currency";
-
+import Currency from "../../../components/Currency/Currency";
 export default function NetIncomeTable() {
   const { data: netIncomeTable = [] } = useQuery({
     queryKey: ["netIncomeTable"],
