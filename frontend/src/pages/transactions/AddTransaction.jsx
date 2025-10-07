@@ -32,7 +32,11 @@ export default function AddTransaction() {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    const payload = { ...data, amount: data.amount * 100 };
+    // Ensure we have a proper number and round to cents
+    const amountCents = Math.round(Number(data.amount) * 100);
+
+    const payload = { ...data, amount: amountCents };
+
     mutation.mutate(payload, {
       onSuccess: () => reset(),
     });
@@ -54,9 +58,10 @@ export default function AddTransaction() {
         <div className="form__group">
           <label className="form__label">Amount</label>
           <input
-            type="text"
+            type="number"
+            step="0.01"
             className="form__input"
-            {...register("amount", { required: true })}
+            {...register("amount", { required: true, valueAsNumber: true })}
           />
         </div>
 
