@@ -1,47 +1,39 @@
+import axios from "axios";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const fetchCategories = async () => {
-  const res = await fetch(`${API_URL}/categories`);
-  if (!res.ok) {
-    const data = await res.json();
-    throw new Error(data.error || "Failed to fetch categories");
+  try {
+    const { data } = await axios.get(`${API_URL}/categories`);
+    return data;
+  } catch (err) {
+    throw new Error(err.response?.data?.error ?? "Failed to fetch categories");
   }
-  return res.json();
 };
 
 export const createCategory = async (category) => {
-  const res = await fetch(`${API_URL}/categories`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(category),
-  });
-  if (!res.ok) {
-    const data = await res.json();
-    throw new Error(data.error || "Failed to create category");
+  try {
+    const { data } = await axios.post(`${API_URL}/categories`, category);
+    return data;
+  } catch (err) {
+    throw new Error(err.response?.data?.error ?? "Failed to create category");
   }
-  return res.json();
 };
 
 export const updateCategory = async (id, category) => {
-  const res = await fetch(`${API_URL}/categories/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(category),
-  });
-  if (!res.ok) {
-    const data = await res.json();
-    throw new Error(data.error || "Failed to update category");
+  try {
+    const { data } = await axios.put(`${API_URL}/categories/${id}`, category);
+    return data;
+  } catch (err) {
+    throw new Error(err.response?.data?.error ?? "Failed to update category");
   }
-  return res.json();
 };
 
 export const deleteCategory = async (id) => {
-  const res = await fetch(`${API_URL}/categories/${id}`, {
-    method: "DELETE",
-  });
-  if (!res.ok) {
-    const data = await res.json();
-    throw new Error(data.error || "Failed to delete category");
+  try {
+    const { data } = await axios.delete(`${API_URL}/categories/${id}`);
+    return data;
+  } catch (err) {
+    throw new Error(err.response?.data?.error ?? "Failed to delete category");
   }
-  return res.json();
 };
