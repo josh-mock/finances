@@ -41,6 +41,11 @@ function EditCategoryModal({ category, onClose }) {
             />
           </div>
 
+          <div className="form__checkbox">
+            <input type="checkbox" {...register("include_in_budget")} />
+            <label className="form__label">Include in budget</label>
+          </div>
+
           <div className="modal__buttons">
             <button
               type="submit"

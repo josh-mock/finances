@@ -19,7 +19,9 @@ CREATE TABLE accounts (
 
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
-    category TEXT NOT NULL UNIQUE
+    category TEXT NOT NULL UNIQUE,
+    include_in_budget BOOLEAN DEFAULT TRUE,
+    budgeted_amount INTEGER DEFAULT 0
 );
 
 CREATE TABLE transactions (

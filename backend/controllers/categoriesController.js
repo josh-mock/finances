@@ -30,11 +30,11 @@ export const getCategoryById = async (req, res) => {
 
 export const createCategory = async (req, res) => {
   try {
-    const { category } = req.body;
+    const { category, include_in_budget } = req.body;
 
     const result = await pool.query(
-      `INSERT INTO categories (category) VALUES ($1) RETURNING *`,
-      [category]
+      `INSERT INTO categories (category, include_in_budget) VALUES ($1 $2) RETURNING *`,
+      [category, include_in_budget]
     );
 
     res.status(201).json(result.rows[0]);
@@ -46,14 +46,14 @@ export const createCategory = async (req, res) => {
 export const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
-    const { category } = req.body;
+    const { category, include_in_budget } = req.body;
 
     const result = await pool.query(
       `UPDATE categories 
-       SET category = $1
-       WHERE id = $2 
+       SET category = $1, include_in_budget = $2
+       WHERE id = $3 
        RETURNING *`,
-      [category, id]
+      [category, include_in_budget, id]
     );
 
     if (result.rows.length === 0) {

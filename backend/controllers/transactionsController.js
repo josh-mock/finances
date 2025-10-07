@@ -9,7 +9,9 @@ export const getAllTransactions = async (req, res) => {
          t.amount,
          t.description,
          t.type,
+         t.account_id,
          a.account_name,
+         t.category_id,
          c.category
        FROM transactions t
        INNER JOIN accounts a ON t.account_id = a.id

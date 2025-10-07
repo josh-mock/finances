@@ -21,6 +21,7 @@ export default function CategoriesTable() {
         <thead>
           <tr>
             <th>Category</th>
+            <th>Budget item</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -30,6 +31,7 @@ export default function CategoriesTable() {
             .map((category) => (
               <tr key={category.id}>
                 <td>{category.category}</td>
+                <td>{category.include_in_budget ? "Yes" : "No"}</td>
                 <td>
                   <button
                     className="table__button"
