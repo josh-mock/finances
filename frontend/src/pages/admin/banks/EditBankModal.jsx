@@ -27,7 +27,7 @@ function EditBankModal({ bank, onClose }) {
     <div className="modal-backdrop">
       <div className="modal-content">
         <h4>Edit Bank</h4>
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="form form--bank" onSubmit={handleSubmit(onSubmit)}>
           <div className="form__group">
             <label className="form__label">Legal Name</label>
             <input
@@ -44,7 +44,7 @@ function EditBankModal({ bank, onClose }) {
             />
           </div>
 
-          <div className="form__group">
+          <div className="form__group form--bank__address">
             <label className="form__label">Address</label>
             <textarea
               className="form__textarea"
