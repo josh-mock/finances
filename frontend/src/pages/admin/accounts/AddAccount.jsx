@@ -46,7 +46,7 @@ function AddAccount() {
       account_type: data.account_type,
       account_name: data.account_name,
       year_opened: data.year_opened,
-      is_isa: data.is_isa,
+      is_isa: data.account_type === "bank" ? !!data.is_isa : false,
       is_closed: data.is_closed,
       year_closed: data.is_closed ? data.year_closed : null,
       ...(data.account_type === "bank" && {
@@ -61,7 +61,7 @@ function AddAccount() {
   return (
     <>
       <h4>Add Account</h4>
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="form form--account" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__group">
           <label className="form__label">Account Name</label>
           <input
@@ -103,6 +103,11 @@ function AddAccount() {
               <label className="form__label">Account Number</label>
               <input className="form__input" {...register("account_number")} />
             </div>
+
+            <div className="form__checkbox">
+              <input type="checkbox" {...register("is_isa")} />
+              <label className="form__label">ISA</label>
+            </div>
           </>
         )}
 
@@ -121,15 +126,10 @@ function AddAccount() {
           />
         </div>
 
-        <div className="form__checkbox">
-          <input type="checkbox" {...register("is_isa")} />
-          <label className="form__label">ISA</label>
-        </div>
-
-        <div className="form__checkbox">
-          <input type="checkbox" {...register("is_closed")} />
-          <label className="form__label">Account closed</label>
-        </div>
+          <div className="form__checkbox">
+            <input type="checkbox" {...register("is_closed")} />
+            <label className="form__label">Account closed</label>
+          </div>
 
         {isClosed && (
           <div className="form__group">
@@ -147,13 +147,13 @@ function AddAccount() {
           </div>
         )}
 
-        <button
-          type="submit"
-          className="form__button"
-          disabled={mutation.isLoading}
-        >
-          {mutation.isLoading ? "Adding..." : "Add Account"}
-        </button>
+          <button
+            type="submit"
+            className="form__button"
+            disabled={mutation.isLoading}
+          >
+            {mutation.isLoading ? "Adding..." : "Add Account"}
+          </button>
       </form>
     </>
   );

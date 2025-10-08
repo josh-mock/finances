@@ -16,11 +16,24 @@
   grid-column: span 2;
 }
 
+.form--account {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+  grid-auto-rows: minmax(min-content, auto);
+  row-gap: 1.6rem;
+}
+
+.form--account > :not(.form__button) {
+  align-self: stretch;
+}
+
 /* Form group */
 .form__group {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  justify-content: flex-start;
 }
 
 /* Labels */
@@ -39,6 +52,7 @@
   outline: none;
   width: 100%;
   box-sizing: border-box;
+  height: 40px;
 }
 
 .form__input:focus,
@@ -115,4 +129,17 @@
   background-color: #f9f9f9;
   color: #aaa;
   cursor: not-allowed;
+}
+
+.form__checkbox {
+  align-items: center;
+  min-height: 40px;
+}
+
+.form__button {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
 }
