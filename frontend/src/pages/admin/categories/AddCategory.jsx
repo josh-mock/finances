@@ -27,7 +27,7 @@ function AddCategory() {
   return (
     <>
       <h4>Add Category</h4>
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="form form--category" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__group">
           <label className="form__label">Category</label>
           <input

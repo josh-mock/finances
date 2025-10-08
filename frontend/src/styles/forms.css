@@ -40,6 +40,15 @@
   align-self: stretch;
 }
 
+.form--category {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form--category .form__input {
+  width: 600px;
+}
+
 /* Form group */
 .form__group {
   display: flex;
