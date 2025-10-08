@@ -7,6 +7,15 @@
   font-size: 1.4rem;
 }
 
+.form--bank {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.form--bank__address {
+  grid-column: span 2;
+}
+
 /* Form group */
 .form__group {
   display: flex;
@@ -72,6 +81,8 @@
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease;
   align-self: flex-start;
+  justify-self: start;
+  width: auto;
 }
 
 .form__button:hover {
