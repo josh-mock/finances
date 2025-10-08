@@ -194,3 +194,58 @@ export const getBudgetTable = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const getUkInterestTable = async (req, res) => {
+  try {
+    const result = await pool.query(`
+      WITH date_range AS (
+        SELECT 
+          CASE
+            WHEN CURRENT_DATE < MAKE_DATE(EXTRACT(YEAR FROM CURRENT_DATE)::int, 4, 6)
+            THEN MAKE_DATE(EXTRACT(YEAR FROM CURRENT_DATE)::int - 1, 4, 6)
+            ELSE MAKE_DATE(EXTRACT(YEAR FROM CURRENT_DATE)::int, 4, 6)
+          END AS start_date,
+          CASE
+            WHEN CURRENT_DATE < MAKE_DATE(EXTRACT(YEAR FROM CURRENT_DATE)::int, 4, 6)
+            THEN MAKE_DATE(EXTRACT(YEAR FROM CURRENT_DATE)::int, 4, 5)
+            ELSE MAKE_DATE(EXTRACT(YEAR FROM CURRENT_DATE)::int + 1, 4, 5)
+          END AS end_date
+      ),
+      filtered_transactions AS (
+        SELECT
+          a.id AS account_id,
+          a.account_name,
+          t.amount
+        FROM accounts a
+        JOIN transactions t ON t.account_id = a.id
+        JOIN categories c ON t.category_id = c.id
+        CROSS JOIN date_range dr
+        WHERE a.account_type = 'bank'
+          AND a.is_isa = FALSE
+          AND t.type = 'Income'
+          AND c.category = 'Interest'
+          AND t.date BETWEEN dr.start_date AND dr.end_date
+      )
+      SELECT
+        account_name,
+        SUM(amount) AS total_interest
+      FROM filtered_transactions
+      GROUP BY account_id, account_name
+
+      UNION ALL
+
+      SELECT
+        'Total' AS account_name,
+        SUM(amount) AS total_interest
+      FROM filtered_transactions
+
+  ORDER BY
+  CASE WHEN account_name = 'Total' THEN 1 ELSE 0 END,
+  account_name;
+    `);
+
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

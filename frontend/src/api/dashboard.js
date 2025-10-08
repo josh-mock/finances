@@ -54,3 +54,12 @@ export const fetchBudgetTable = async () => {
     );
   }
 };
+
+export const fetchUkInterestTable = async () => {
+  try {
+    const { data } = await axios.get(`${API_URL}/dashboard/interest/uk/table`);
+    return data;
+  } catch (err) {
+    throw new Error(err.response?.data?.error ?? "Failed to fetch table");
+  }
+};
