@@ -1,25 +1,23 @@
+import axios from "axios";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const fetchBudget = async () => {
-  const res = await fetch(`${API_URL}/budget`);
-  if (!res.ok) {
-    const data = await res.json();
-    throw new Error(data.error || "Failed to fetch budget");
+  try {
+    const response = await axios.get(`${API_URL}/budget`);
+    return response.data;
+  } catch (err) {
+    const message = err.response?.data?.error ?? "Failed to fetch budget";
+    throw new Error(message);
   }
-  return res.json();
 };
 
 export const updateBudget = async (amounts) => {
-  const res = await fetch(`${API_URL}/budget`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ amounts }),
-  });
-
-  if (!res.ok) {
-    const data = await res.json();
-    throw new Error(data.error || "Failed to update budget");
+  try {
+    const response = await axios.put(`${API_URL}/budget`, { amounts });
+    return response.data;
+  } catch (err) {
+    const message = err.response?.data?.error ?? "Failed to update budget";
+    throw new Error(message);
   }
-
-  return res.json();
 };
