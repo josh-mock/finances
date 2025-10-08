@@ -28,6 +28,11 @@
   align-self: stretch;
 }
 
+.form--add-transaction {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .form--edit-account {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

@@ -44,7 +44,7 @@ export default function AddTransaction() {
   return (
     <div>
       <h3>Add Transaction</h3>
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="form form--add-transaction" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__group">
           <label className="form__label">Date</label>
           <input
