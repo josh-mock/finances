@@ -51,6 +51,10 @@ export default function EditTransactionModal({ transaction, onClose }) {
     });
   };
 
+  if (accountsLoading || categoriesLoading) {
+    return <p>Loading…</p>;
+  }
+
   return (
     <div className="modal-backdrop">
       <div className="modal-content">
