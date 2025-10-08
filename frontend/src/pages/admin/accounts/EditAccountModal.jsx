@@ -44,7 +44,10 @@ function EditAccountModal({ account, onClose }) {
     <div className="modal-backdrop">
       <div className="modal-content">
         <h2>Edit Account</h2>
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="form form--edit-account"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="form__group">
             <label className="form__label">Account Name</label>
             <input
@@ -138,7 +141,7 @@ function EditAccountModal({ account, onClose }) {
               disabled={mutation.isLoading}
               className="form__button"
             >
-              {mutation.isLoading ? "Saving..." : "Save Changes"}
+              {mutation.isLoading ? "Saving..." : "Save"}
             </button>
             <button
               type="button"

@@ -16,7 +16,7 @@
   grid-column: span 2;
 }
 
-.form--account {
+.form--add-account {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: start;
@@ -25,6 +25,18 @@
 }
 
 .form--account > :not(.form__button) {
+  align-self: stretch;
+}
+
+.form--edit-account {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+  grid-auto-rows: minmax(min-content, auto);
+  row-gap: 1.6rem;
+}
+
+.form--edit-account > :not(.form__button) {
   align-self: stretch;
 }
 

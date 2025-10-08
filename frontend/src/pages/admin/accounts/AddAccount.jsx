@@ -61,7 +61,7 @@ function AddAccount() {
   return (
     <>
       <h4>Add Account</h4>
-      <form className="form form--account" onSubmit={handleSubmit(onSubmit)}>
+      <form className="form form--add-account" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__group">
           <label className="form__label">Account Name</label>
           <input
