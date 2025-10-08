@@ -13,6 +13,8 @@ export default function AddTransaction() {
     queryFn: fetchAccounts,
   });
 
+  const openAccounts = accounts.filter((acc) => acc.is_closed === false);
+
   const { data: categories = [], isLoading: categoriesLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
@@ -44,7 +46,10 @@ export default function AddTransaction() {
   return (
     <div>
       <h3>Add Transaction</h3>
-      <form className="form form--add-transaction" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="form form--add-transaction"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="form__group">
           <label className="form__label">Date</label>
           <input
@@ -93,7 +98,7 @@ export default function AddTransaction() {
             {...register("account_id", { required: true })}
             disabled={accountsLoading}
           >
-            {accounts.map((account) => (
+            {openAccounts.map((account) => (
               <option key={account.id} value={account.id}>
                 {account.account_name}
               </option>
