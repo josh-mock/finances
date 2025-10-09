@@ -7,6 +7,7 @@ import budgetRoutes from "./routes/budget.js";
 import categoryRoutes from "./routes/categories.js";
 import dashboardRoutes from "./routes/dashboard.js";
 import transactionRoutes from "./routes/transactions.js";
+import fbarRoutes from "./routes/fbar.js";
 dotenv.config();
 
 const port = 3000;
@@ -25,6 +26,9 @@ app.use("/budget", budgetRoutes);
 
 // DASHBOARD ROUTES
 app.use("/dashboard", dashboardRoutes);
+
+// FBAR ROUTES
+app.use("/fbar", fbarRoutes);
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);

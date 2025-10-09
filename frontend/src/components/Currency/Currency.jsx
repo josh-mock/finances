@@ -1,12 +1,14 @@
 import formatCurrency from "../../lib/formatCurrency";
 import styles from "./currency.module.css";
 
-export default function Currency({ value }) {
+export default function Currency({ value, symbol = "£", roundUp = false }) {
   console.log(styles);
   return (
     <div className={styles.currency}>
-      <span>£</span>
-      <span className={styles.currency__value}>{formatCurrency(value)}</span>
+      <span>{symbol}</span>
+      <span className={styles.currency__value}>
+        {formatCurrency(value, roundUp)}
+      </span>
     </div>
   );
 }

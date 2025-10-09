@@ -4,6 +4,8 @@ import Admin from "./pages/admin/admin";
 import Budget from "./pages/Budget";
 import Home from "./pages/Home";
 import Transactions from "./pages/transactions/Transactions";
+import Fbar from "./pages/fbar/fbar";
+
 export default function App() {
   return (
     <Router>
@@ -13,6 +15,7 @@ export default function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/budget" element={<Budget />} />
+          <Route path="/fbar" element={<Fbar />} />
         </Route>
       </Routes>
     </Router>

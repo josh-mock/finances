@@ -32,6 +32,12 @@ export default function Layout() {
                   Budget
                 </Link>
               </li>
+
+              <li className="layout__nav-item">
+                <Link className="layout__nav-link" to="/fbar">
+                  FBAR
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>
