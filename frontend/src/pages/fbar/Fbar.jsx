@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchFbarTable } from "../../api/fbar";
 import Currency from "../../components/Currency/Currency";
 import styles from "./fbar.module.css";
+import UsInterestTable from "./UsInterestTable";
 
 export default function Fbar() {
   const { data: fbar = [], isLoading } = useQuery({
@@ -47,6 +48,9 @@ export default function Fbar() {
           ))}
         </tbody>
       </table>
+
+      <h2>Interest</h2>
+      <UsInterestTable />
     </div>
   );
 }

@@ -44,27 +44,3 @@ CREATE TABLE
             )
         )
     );
-
--- Interest in calendar year
-SELECT
-    COALESCE(accounts.account_name, 'Total') AS account_name,
-    SUM(transactions.amount) AS total
-FROM
-    transactions
-    JOIN accounts ON transactions.account_id = accounts.id
-WHERE
-    "type" = 'Income'
-    AND transactions.date >= DATE_TRUNC('year', CURRENT_DATE) - INTERVAL '1 year'
-    AND transactions.date < DATE_TRUNC('year', CURRENT_DATE)
-    AND category_id = (
-        SELECT
-            id
-        FROM
-            categories
-        WHERE
-            category = 'Interest'
-    )
-GROUP BY
-    ROLLUP (accounts.account_name)
-ORDER BY
-    accounts.account_name;

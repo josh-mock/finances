@@ -1,19 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import Currency from "../../../components/Currency/Currency";
-import { fetchUkInterestTable } from "../../../api/dashboard";
+import Currency from "../../components/Currency/Currency";
+import { fetchUsInterestTable } from "../../api/dashboard";
 
-export default function UkInterestTable() {
-  const { data: ukInterestTable = [] } = useQuery({
-    queryKey: ["ukInterestTable"],
-    queryFn: fetchUkInterestTable,
+export default function UsInterestTable() {
+  const { data: usInterestTable = [] } = useQuery({
+    queryKey: ["usInterestTable"],
+    queryFn: fetchUsInterestTable,
   });
 
-  if (!ukInterestTable.length)
+  if (!usInterestTable.length)
     return <div className="table__empty">No data.</div>;
 
   return (
     <div>
-      <h2>UK Tax Year Interest</h2>
       <table className="table">
         <thead>
           <tr>
@@ -22,7 +21,7 @@ export default function UkInterestTable() {
           </tr>
         </thead>
         <tbody>
-          {ukInterestTable.map((row) => (
+          {usInterestTable.map((row) => (
             <tr key={row.account_name}>
               <td>
                 {row.account_name === "Total" ? (
@@ -34,10 +33,10 @@ export default function UkInterestTable() {
               <td>
                 {row.account_name === "Total" ? (
                   <strong>
-                    <Currency value={row.total_interest} />
+                    <Currency value={row.total} />
                   </strong>
                 ) : (
-                  <Currency value={row.total_interest} />
+                  <Currency value={row.total} />
                 )}
               </td>
             </tr>
