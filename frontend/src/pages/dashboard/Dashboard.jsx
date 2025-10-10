@@ -1,7 +1,7 @@
 import Balances from "./balances/Balances";
 import Budget from "./Budget/Budget";
 import NetIncome from "./netIncome/NetIncome";
-import UkInterestTable from "./UkInterest/UkInterestTable";
+import UkInterest from "./UkInterest/UkInterest";
 
 export default function Dashboard() {
   return (
@@ -10,8 +10,7 @@ export default function Dashboard() {
       <Balances />
       <NetIncome />
       <Budget />
-      <UkInterestTable />
-
+      <UkInterest />
     </div>
   );
 }

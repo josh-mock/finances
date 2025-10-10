@@ -13,7 +13,6 @@ export default function UkInterestTable() {
 
   return (
     <div>
-      <h2>UK Tax Year Interest</h2>
       <table className="table">
         <thead>
           <tr>
