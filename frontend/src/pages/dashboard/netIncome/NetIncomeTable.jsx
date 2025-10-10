@@ -11,7 +11,7 @@ export default function NetIncomeTable() {
     return <div className="table__empty">No data.</div>;
 
   return (
-    <table className="table">
+    <table className="table dashboard-table">
       <thead>
         <tr>
           <th>Period</th>

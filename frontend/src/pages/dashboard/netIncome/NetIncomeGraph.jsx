@@ -27,6 +27,7 @@ export default function NetIncomeGraph() {
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         fill: true,
         tension: 0.3,
+        pointRadius: 2,
       },
     ],
   };
@@ -53,7 +54,9 @@ export default function NetIncomeGraph() {
         <option value="month">Monthly</option>
         <option value="year">Yearly</option>
       </select>
-      <Line data={chartData} options={chartOptions} />
+      <div style={{ width: "750px" }}>
+        <Line data={chartData} options={chartOptions} />
+      </div>
     </div>
   );
 }

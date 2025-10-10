@@ -18,7 +18,7 @@ export default function BalancesTable() {
 
   return (
     <div className="dashboard__table-container">
-      <table className="table balances-table">
+      <table className="table dashboard-table">
         <thead>
           <tr>
             <th>Account Name</th>

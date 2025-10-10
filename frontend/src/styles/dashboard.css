@@ -6,6 +6,7 @@
 
 .dashboard__section {
   margin-bottom: 5rem;
+  min-height: 555px;
 }
 
 .dashboard__section-title {
@@ -13,9 +14,8 @@
   font-size: 2rem;
 }
 
-.dashboard__table-outer-container {
+.dashboard__balance-table-outer-container {
   flex: 1;
-  height: 500px;
 }
 
 .dashboard__section-inner-container {
@@ -25,4 +25,8 @@
 
 .dashboard__table-container {
   height: 100%;
+}
+
+.dashboard__net-table-outer-container {
+  flex: 1;
 }

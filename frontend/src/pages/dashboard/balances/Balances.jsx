@@ -6,7 +6,7 @@ export default function Balances() {
     <div className="dashboard__section">
       <h3 className="dashboard__section-title">Balances</h3>
       <div className="dashboard__section-inner-container">
-        <div className="dashboard__table-outer-container">
+        <div className="dashboard__balance-table-outer-container">
           <BalancesTable />
         </div>
         <BalancesGraph />
