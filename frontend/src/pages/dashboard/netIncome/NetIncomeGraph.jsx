@@ -48,7 +48,11 @@ export default function NetIncomeGraph() {
 
   return (
     <div>
-      <select value={period} onChange={(e) => setPeriod(e.target.value)}>
+      <select
+        value={period}
+        onChange={(e) => setPeriod(e.target.value)}
+        className="form__select form__select--graph"
+      >
         <option value="day">Daily</option>
         <option value="week">Weekly</option>
         <option value="month">Monthly</option>

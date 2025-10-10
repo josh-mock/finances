@@ -81,6 +81,11 @@
   height: 40px;
 }
 
+.form__select--graph {
+  width: auto;
+  margin-bottom: 1rem;
+}
+
 .form__input:focus,
 .form__select:focus,
 .form__textarea:focus {
