@@ -14,8 +14,8 @@ export default function BudgetTable() {
   const totalRow = budgetTable.find((row) => row.category === "Total");
 
   return (
-    <div>
-      <table className="table">
+    <div className="dashboard__table-container">
+      <table className="table dashboard-table">
         <thead>
           <tr>
             <th>Category</th>

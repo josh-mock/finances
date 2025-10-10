@@ -3,10 +3,16 @@ import BudgetTable from "./BudgetTable";
 
 export default function Budget() {
   return (
-    <>
-      <h3>Budget</h3>
-      <BudgetTable />
-      <BudgetGraph />
-    </>
+    <div className="dashboard__section">
+      <h3 className="dashboard__section-title">Budget</h3>
+      <div className="budget">
+        <div className="budget__table">
+          <BudgetTable />
+        </div>
+        <div className="budget__graph">
+          <BudgetGraph />
+        </div>
+      </div>
+    </div>
   );
 }

@@ -136,17 +136,17 @@ export default function BudgetGraph() {
 
   return (
     <div>
-      <label>View:</label>
       <select
         value={mode}
         onChange={(e) => setMode(e.target.value)}
-        className="form__select"
+        className="form__select form__select--graph"
       >
         <option value="values">Values (£)</option>
         <option value="percent">% of Budget</option>
       </select>
-
-      <Bar data={chartData} options={chartOptions} />
+      <div className="budget__graph">
+        <Bar data={chartData} options={chartOptions} />
+      </div>{" "}
     </div>
   );
 }

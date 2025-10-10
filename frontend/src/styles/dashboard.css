@@ -29,3 +29,17 @@
 .dashboard__net-table-outer-container {
   flex: 1;
 }
+
+.budget {
+  display: flex;
+
+  gap: 2.5rem;
+}
+
+.budget__table {
+  flex: 2.5; /* or flex: 1 1 25% */
+}
+
+.budget__graph {
+  flex: 3; /* or flex: 3 1 75% */
+}
