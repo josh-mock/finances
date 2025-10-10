@@ -17,8 +17,8 @@ export default function BalancesTable() {
     .sort((a, b) => a.account_name.localeCompare(b.account_name));
 
   return (
-    <div>
-      <table className="table">
+    <div className="dashboard__table-container">
+      <table className="table balances-table">
         <thead>
           <tr>
             <th>Account Name</th>

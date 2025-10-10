@@ -1,0 +1,28 @@
+.dashboard__title {
+  font-size: 4rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.dashboard__section {
+  margin-bottom: 5rem;
+}
+
+.dashboard__section-title {
+  margin-bottom: 2.5rem;
+  font-size: 2rem;
+}
+
+.dashboard__table-outer-container {
+  flex: 1;
+  height: 500px;
+}
+
+.dashboard__section-inner-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.dashboard__table-container {
+  height: 100%;
+}

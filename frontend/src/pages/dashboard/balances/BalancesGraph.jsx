@@ -28,6 +28,8 @@ export default function BalancesGraph() {
   };
 
   const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       tooltip: {
         callbacks: {
@@ -39,5 +41,9 @@ export default function BalancesGraph() {
     },
   };
 
-  return <Doughnut data={chartData} options={chartOptions} />;
+  return (
+    <div style={{ width: "500px", height: "500px" }}>
+      <Doughnut data={chartData} options={chartOptions} />
+    </div>
+  );
 }

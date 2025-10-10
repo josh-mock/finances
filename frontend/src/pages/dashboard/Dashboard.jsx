@@ -6,7 +6,7 @@ import UkInterest from "./UkInterest/UkInterest";
 export default function Dashboard() {
   return (
     <div>
-      <h2>Dashboard</h2>
+      <h2 className="dashboard__title">Dashboard</h2>
       <Balances />
       <NetIncome />
       <Budget />

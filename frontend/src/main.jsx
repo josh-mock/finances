@@ -13,6 +13,7 @@ import "./styles/modal.css";
 import "./styles/normalize.css";
 import "./styles/pagination.css";
 import "./styles/tables.css";
+import "./styles/dashboard.css";
 
 const queryClient = new QueryClient();
 

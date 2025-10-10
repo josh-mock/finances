@@ -4,7 +4,7 @@ import NetIncomeTable from "./NetIncomeTable";
 export default function NetIncome() {
   return (
     <div>
-      <h3>Net Income</h3>
+      <h3 className="dashboard__section-title">Net Income</h3>
       <div>
         <NetIncomeTable />
         <NetIncomeGraph />
