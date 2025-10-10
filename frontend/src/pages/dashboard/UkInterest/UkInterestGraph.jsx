@@ -38,7 +38,13 @@ export default function UkInterestGraph() {
     responsive: true,
     plugins: {
       legend: { position: "top" },
-      tooltip: { mode: "index", intersect: false },
+      tooltip: {
+        mode: "index",
+        intersect: false,
+        callbacks: {
+          label: (tooltipItem) => `£${tooltipItem.raw.toLocaleString()}`,
+        },
+      },
       annotation: {
         annotations: {
           line1: {
@@ -53,6 +59,7 @@ export default function UkInterestGraph() {
               content: "£1000 threshold",
               position: "center",
               backgroundColor: "rgba(255, 99, 132, 0.8)",
+              color: "#fff",
             },
           },
         },
@@ -60,7 +67,13 @@ export default function UkInterestGraph() {
     },
     scales: {
       x: { stacked: true },
-      y: { stacked: true, beginAtZero: true },
+      y: {
+        stacked: true,
+        beginAtZero: true,
+        ticks: {
+          callback: (value) => `£${value.toLocaleString()}`,
+        },
+      },
     },
   };
 
